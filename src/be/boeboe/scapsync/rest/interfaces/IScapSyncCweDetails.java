@@ -8,44 +8,6 @@ import java.util.Date;
 /**
  * Interface to represent a ScapSync CWE
  * 
- * Example json:
- * { "observed_examples" : [ { ... } ], "detection_methods" : [ { ... } ],
- *   "attack_patterns" : [ { ... } ], "mitigations" : [ { ... } ],
- *   "upstream_modified" : "2012-05-11T00:00:00Z", "cwe_id" : "CWE-119",
- *   "references" : [ {...} ], "cwe_type" : "Weakness",
- *   "affected_resources" : [ "Memory" ], "description" : "Certain ...",
- *   "version_count" : 1, "summary" : "The software performs ...",
- *   "version_url" : "/versions/cwe/CWE-119",
- *   "time_of_introduction" : [ "Architecture and Design", ... ],
- *   "likelihood_of_exploit" : "High", "history" : [ { ... } ],
- *   "taxonomy_mappings" : [ { ... } ], "consequences" : [ { ... } ],
-  "relationships" : [ {
-    "url" : "/cwe/CWE-118",
-    "target_form" : "Weakness",
-    "target_id" : "CWE-118",
-    "nature" : "is a child of",
-    "views" : [ {
-      "url" : "/cwe/CWE-1000",
-      "id" : "CWE-1000"
-    }, {
-      "url" : "/cwe/CWE-699",
-      "id" : "CWE-699"
-    } ]
-  }, ... ]
-  } ],
-  "alternate_terms" : [ {
-    "name" : "Memory Corruption",
-    "description" : "The generic term ..."
-  } ],
-  "platforms" : {
-    "languages" : [ "Languages without memory management support", "C (Often)", "C++ (Often)", "Assembly" ],
-    "notes" : "It is possible ..."
-  },
-  "demonstrative_examples" : [ {
-    "body" : "Code example ...",
-    "intro" : "This example takes an IP address ..."
-  }, ...]
-}
  * @author boeboe
  */
 public interface IScapSyncCweDetails {
@@ -93,11 +55,35 @@ public interface IScapSyncCweDetails {
   public IScapSyncCweConsequence[] getConsequences();
 
   /**
-   * Get an array of History from this CWE.
+   * Get an array of Histories from this CWE.
    * @return array of IScapSyncCweHistory's for this CWE
    */
   public IScapSyncCweHistory[] getHistory();
-  
+
+  /**
+   * Get an array of Relationships from this CWE.
+   * @return array of IScapSyncCweRelationship's for this CWE
+   */
+  public IScapSyncCweRelationship[] getRelationships();
+
+  /**
+   * Get an array of Alternate Terms from this CWE.
+   * @return array of IScapSyncCweAlternateTerm's for this CWE
+   */
+  public IScapSyncCweAlternateTerm[] getAlternateTerms();
+
+  /**
+   * Get the Platforms from this CWE.
+   * @return platforms an IScapSyncCwePlatforms for this CWE
+   */
+  public IScapSyncCwePlatforms getPlatforms();
+
+  /**
+   * Get an array of Demonstrative Examples from this CWE.
+   * @return array of IScapSyncCweDemonstrativeExample's for this CWE
+   */
+  public IScapSyncCweDemonstrativeExample[] getDemonstrativeExamples();
+
   /**
    * Get the Upstream Modified Date from this CWE.
    * @return date the Upstream Modified Date from this CWE
@@ -105,56 +91,56 @@ public interface IScapSyncCweDetails {
   public Date getUpstreamModified();
 
   /**
-   * Get the CWE ID from this CWE.
+   * Get the ID from this CWE.
    * @return notes the CWE ID from this CWE
    */
   public String getCweId();
 
   /**
-   * Get the CWE Type from this CWE.
+   * Get the Type from this CWE.
    * @return type the CWE Type from this CWE
    */
   public String getCweType();
 
   /**
-   * Get the CWE Affected Resources from this CWE.
+   * Get the Affected Resources from this CWE.
    * @return stringArray the CWE Affected Resources from this CWE
    */
   public String[] getCweAffectedResources();
 
   /**
-   * Get the CWE Description from this CWE.
+   * Get the Description from this CWE.
    * @return description the CWE Description from this CWE
    */
   public String getCweDescription();
 
   /**
-   * Get the CWE VersionCount from this CWE.
+   * Get the VersionCount from this CWE.
    * @return int the CWE VersionCount from this CWE
    */
   public int getCweVersionCount();
 
   /**
-   * Get the CWE Summary from this CWE.
+   * Get the Summary from this CWE.
    * @return summary the CWE Summary from this CWE
    */
   public String getCweSummary();
 
   /**
-   * Get the CWE (relative) Version Url from this CWE.
+   * Get the (relative) Version Url from this CWE.
    * @return url the CWE Version Url from this CWE
    */
   public String getCweVersionUrl();
 
   /**
-   * Get the CWE Times Of Introduction from this CWE.
+   * Get the Times Of Introduction from this CWE.
    * @return stringArray an array containing the Times Of Introduction from
    * this CWE
    */
   public String[] getCweTimesOfIntroduction();
 
   /**
-   * Get the CWE Likelihood Of Exploit from this CWE.
+   * Get the Likelihood Of Exploit from this CWE.
    * @return likelihood the Likelihood Of Exploit from this CWE
    */
   public String getCweLikelihoodOfExploit();

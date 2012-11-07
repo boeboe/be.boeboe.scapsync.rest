@@ -5,13 +5,7 @@ package be.boeboe.scapsync.rest.interfaces;
 
 /**
  * Interface to represent a ScapSync CWE Detection Method
- * 
- * Example json:
- * { "notes" : "Detection ...", "effectiveness" : "High", 
- *   "name" : "Automated Static Analysis",
- *   "description" : "This weakness ..."}
  * @author boeboe
- *
  */
 public interface IScapSyncCweDetectionMethod {
 

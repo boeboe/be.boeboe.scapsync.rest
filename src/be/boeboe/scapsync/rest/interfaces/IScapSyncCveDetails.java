@@ -4,15 +4,6 @@ import java.util.Date;
 
 /**
  * Interface to represent a ScapSync CVE
- * 
- * Example json:
- * { "cvss_vector" : "A:P/AC:L/I:P/C:P/Au:N/AV:N", "cvss_base_score" : 7.5, 
- *   "version_count" : 1, "upstream_modified" : "2009-12-19T06:56:44.377000Z",
- *   "summary" : "Buffer underflow in src/http/ngx_http_parse.c ...",
- *   "references" : [ { ... } ], 
- *   "upstream_published" : "2009-09-15T22:30:00.233000Z",
- *   "assessments" : [ ], "cwe" : { ... }, "cvss" : { ... },
- *   "version_url" : "/versions/cve/CVE-2009-2629" }
  * @author boeboe
  */
 public interface IScapSyncCveDetails {

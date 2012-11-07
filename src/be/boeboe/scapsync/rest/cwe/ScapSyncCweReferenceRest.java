@@ -14,17 +14,31 @@ import be.boeboe.scapsync.rest.ScapSyncUtils;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweReference;
 
 /**
+ * Rest Implementation of a ScapSync CWE Reference
+ * 
+ * Example json:
+ * { "edition" : "2nd Edition", 
+ *   "section" : "Chapter 5, ...",
+ *   "title" : "Writing Secure Code",
+ *   "publication_date" : "2002-01-01T00:00:00Z",
+ *   "author" : [ "M. Howard", "D. LeBlanc" ] }
+ * { "url" : "http://msdn.microsoft.com/en-us/library/ms647466.aspx",
+ *   "title" : "Using the Strsafe.h Functions",
+ *   "author" : [ "Microsoft" ] }
+ * { "date" : "2010-03-09T00:00:00Z",
+ *   "url" : "http://blogs.sans.org/appsecstreetfighter/...",
+ *   "title" : "Top 25 Series - Rank 7 - Path Traversal",
+ *   "author" : [ "Johannes Ullrich" ] }
  * @author boeboe
- *
  */
 public class ScapSyncCweReferenceRest implements IScapSyncCweReference {
-  private static String URL = "url";
-  private static String TITLE = "title";
-  private static String EDITION = "edition";
-  private static String SECTION = "section";
-  private static String DATE = "date";
-  private static String PUBLICATION_DATE = "publication_date";
-  private static String AUTOR = "author";
+  private static final String URL = "url";
+  private static final String TITLE = "title";
+  private static final String EDITION = "edition";
+  private static final String SECTION = "section";
+  private static final String DATE = "date";
+  private static final String PUBLICATION_DATE = "publication_date";
+  private static final String AUTOR = "author";
 
   private URI fUrl;
   private String fTitle;
@@ -46,16 +60,13 @@ public class ScapSyncCweReferenceRest implements IScapSyncCweReference {
           scapSyncCweReferenceRest.getString(PUBLICATION_DATE));
       
       JSONArray authors = scapSyncCweReferenceRest.getJSONArray(AUTOR);
-      fAutors = new String[authors.length()];
-      for ( int i = 0 ; i < authors.length(); i++) {
-        fAutors[i] = authors.getString(i);
-      }
+      fAutors = ScapSyncUtils.getStringArray(authors);
     } catch (JSONException e) {
       e.printStackTrace();
     }
   }
   
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweReference#getUrl()
    */
   @Override
@@ -63,7 +74,7 @@ public class ScapSyncCweReferenceRest implements IScapSyncCweReference {
     return fUrl;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweReference#getTitle()
    */
   @Override
@@ -71,7 +82,7 @@ public class ScapSyncCweReferenceRest implements IScapSyncCweReference {
     return fTitle;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweReference#getEdition()
    */
   @Override
@@ -79,7 +90,7 @@ public class ScapSyncCweReferenceRest implements IScapSyncCweReference {
     return fEdition;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweReference#getSection()
    */
   @Override
@@ -87,7 +98,7 @@ public class ScapSyncCweReferenceRest implements IScapSyncCweReference {
     return fSection;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweReference#getDate()
    */
   @Override
@@ -95,7 +106,7 @@ public class ScapSyncCweReferenceRest implements IScapSyncCweReference {
     return fDate;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweReference#getPublicationDate()
    */
   @Override
@@ -103,7 +114,7 @@ public class ScapSyncCweReferenceRest implements IScapSyncCweReference {
     return fPublicationDate;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweReference#getAuthors()
    */
   @Override

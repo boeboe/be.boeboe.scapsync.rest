@@ -8,6 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 /**
  * @author boeboe
  *
@@ -41,4 +44,17 @@ public class ScapSyncUtils {
     return date;
   }
   
+  /**
+   * A helper method to convert one dimensional JSONArrays to StringArrays.
+   * @param jsonArray the JSONArray to convert
+   * @return stringArray the converted StringArray
+   * @throws JSONException exception during JSON parsing
+   */
+  public static String[] getStringArray(JSONArray jsonArray) throws JSONException {
+    String[] stringArray = new String[jsonArray.length()];
+    for ( int i = 0 ; i < jsonArray.length(); i++) {
+       stringArray[i] = jsonArray.getString(i);
+    }
+    return stringArray;
+  }
 }

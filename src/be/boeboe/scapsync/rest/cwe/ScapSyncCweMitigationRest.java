@@ -9,15 +9,22 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweMitigation;
 
 /**
+ * Rest Implementation of a ScapSync CWE Mitigation
+ * 
+ * Example json:
+ * { "phase" : "Requirements", "description" : "Use a language...",
+ *   "strategy" : "Language Selection" }
+ * { "phase" : "Build and Compilation", "notes" : "This is not ...",
+ *   "effectiveness" : "Defense in Depth", "description" : "Run or ...",
+ *   "strategy" : "Compilation or Build Hardening" }
  * @author boeboe
- *
  */
 public class ScapSyncCweMitigationRest implements IScapSyncCweMitigation {
-  private static String PHASE = "phase";
-  private static String EFFECTIVENESS = "effectiveness";
-  private static String NOTES = "notes";
-  private static String DESCRIPTION = "description";
-  private static String STRATEGY = "strategy";
+  private static final String PHASE = "phase";
+  private static final String EFFECTIVENESS = "effectiveness";
+  private static final String NOTES = "notes";
+  private static final String DESCRIPTION = "description";
+  private static final String STRATEGY = "strategy";
 
   private String fPhase;
   private String fEffectiveness;
@@ -38,7 +45,7 @@ public class ScapSyncCweMitigationRest implements IScapSyncCweMitigation {
     }
   }
   
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweMitigation#getPhase()
    */
   @Override
@@ -46,7 +53,7 @@ public class ScapSyncCweMitigationRest implements IScapSyncCweMitigation {
     return fPhase;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweMitigation#getEffectiveness()
    */
   @Override
@@ -54,7 +61,7 @@ public class ScapSyncCweMitigationRest implements IScapSyncCweMitigation {
     return fEffectiveness;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweMitigation#getNotes()
    */
   @Override
@@ -62,7 +69,7 @@ public class ScapSyncCweMitigationRest implements IScapSyncCweMitigation {
     return fNotes;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweMitigation#getDescription()
    */
   @Override
@@ -70,7 +77,7 @@ public class ScapSyncCweMitigationRest implements IScapSyncCweMitigation {
     return fDescription;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweMitigation#getStrategy()
    */
   @Override

@@ -5,11 +5,7 @@ package be.boeboe.scapsync.rest.interfaces;
 
 /**
  * Interface to represent a ScapSync Sort Field
- * 
- * Example json:
- * {"selected":false,"name":"Modification Date (Newest First)"}
  * @author boeboe
- *
  */
 public interface IScapSyncSearchSortField {
 

@@ -5,11 +5,6 @@ package be.boeboe.scapsync.rest.interfaces;
 
 /**
  * Interface to represent a ScapSync Facet
- * 
- * Example json:
- * { "values":[{"selected":true,"count":11,
- *   "name":"Vulnerability","url":"/search?q=nginx"}],
- *   "name":"Type"}
  * @author boeboe
  */
 public interface IScapSyncSearchFacet {

@@ -9,13 +9,17 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweConsequence;
 
 /**
+ * Rest Implementation of ScapSync CWE Consequence
+ * 
+ * Example json:
+ * { "impact" : "Execute unauthorized ...", "scope" : "Integrity, Conf...",
+ * "notes" : "If the memory accessible by the attacker ..." }
  * @author boeboe
- *
  */
 public class ScapSyncCweConsequenceRest implements IScapSyncCweConsequence {
-  private static String IMPACT = "impact";
-  private static String SCOPE = "scope";
-  private static String NOTES = "notes";
+  private static final String IMPACT = "impact";
+  private static final String SCOPE = "scope";
+  private static final String NOTES = "notes";
 
   private String fImpact;
   private String fScope;
@@ -32,7 +36,7 @@ public class ScapSyncCweConsequenceRest implements IScapSyncCweConsequence {
     }
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweConsequence#getImpact()
    */
   @Override
@@ -40,7 +44,7 @@ public class ScapSyncCweConsequenceRest implements IScapSyncCweConsequence {
     return fImpact;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweConsequence#getScope()
    */
   @Override
@@ -48,7 +52,7 @@ public class ScapSyncCweConsequenceRest implements IScapSyncCweConsequence {
     return fScope;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweConsequence#getNotes()
    */
   @Override

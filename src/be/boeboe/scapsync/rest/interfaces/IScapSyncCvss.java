@@ -2,14 +2,6 @@ package be.boeboe.scapsync.rest.interfaces;
 
 /**
  * Interface to represent a ScapSync Cvss (Common Vulnerability Scoring System)
- * 
- * Example json:
- * { "Access Complexity" : "Low",
- *   "Confidentiality Impact" : "Partial",
- *   "Access Vector" : "Local",
- *   "Authentication" : "None",
- *   "Integrity Impact" : "None",
- *   "Availability Impact" : "None" }
  * @author boeboe
  */
 public interface IScapSyncCvss {

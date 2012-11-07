@@ -9,15 +9,19 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetectionMethod;
 
 /**
+ * Rest Implementation of ScapSync CWE Detection Method
+ * 
+ * Example json:
+ * { "notes" : "Detection ...", "effectiveness" : "High", 
+ *   "name" : "Automated Static Analysis",
+ *   "description" : "This weakness ..."}
  * @author boeboe
- *
  */
-public class ScapSyncCweDetectionMethodRest implements
-    IScapSyncCweDetectionMethod {
-  private static String NOTES = "notes";
-  private static String EFFECTIVENESS = "effectiveness";
-  private static String NAME = "name";
-  private static String DESCRIPTION = "description";
+public class ScapSyncCweDetectionMethodRest implements IScapSyncCweDetectionMethod {
+  private static final String NOTES = "notes";
+  private static final String EFFECTIVENESS = "effectiveness";
+  private static final String NAME = "name";
+  private static final String DESCRIPTION = "description";
   
   private String fNotes;
   private String fEffectiveness;
@@ -36,7 +40,7 @@ public class ScapSyncCweDetectionMethodRest implements
     }
   }
   
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetectionMethod#getNotes()
    */
   @Override
@@ -44,7 +48,7 @@ public class ScapSyncCweDetectionMethodRest implements
     return fNotes;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetectionMethod#getEffectiveness()
    */
   @Override
@@ -52,7 +56,7 @@ public class ScapSyncCweDetectionMethodRest implements
     return fEffectiveness;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetectionMethod#getName()
    */
   @Override
@@ -60,7 +64,7 @@ public class ScapSyncCweDetectionMethodRest implements
     return fName;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetectionMethod#getDescription()
    */
   @Override

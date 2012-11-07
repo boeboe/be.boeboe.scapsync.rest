@@ -9,16 +9,24 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCvss;
 
 /**
+ * Rest Implementation of a ScapSync Cvss (Common Vulnerability Scoring System)
+ * 
+ * Example json:
+ * { "Access Complexity" : "Low",
+ *   "Confidentiality Impact" : "Partial",
+ *   "Access Vector" : "Local",
+ *   "Authentication" : "None",
+ *   "Integrity Impact" : "None",
+ *   "Availability Impact" : "None" }
  * @author boeboe
- *
  */
 public class ScapSyncCveCvssRest implements IScapSyncCvss {
-  private static String CVSS_ACCES_VECTOR = "Access Vector";
-  private static String CVSS_ACCES_COMPLEXITY = "Access Complexity";
-  private static String CVSS_AUTHENTICATION = "Authentication";
-  private static String CVSS_CONF_IMPACT = "Confidentiality Impact";
-  private static String CVSS_INTEG_IMPACT = "Integrity Impact";
-  private static String CVSS_AVAIL_IMPACT = "Availability Impact";
+  private static final String CVSS_ACCES_VECTOR = "Access Vector";
+  private static final String CVSS_ACCES_COMPLEXITY = "Access Complexity";
+  private static final String CVSS_AUTHENTICATION = "Authentication";
+  private static final String CVSS_CONF_IMPACT = "Confidentiality Impact";
+  private static final String CVSS_INTEG_IMPACT = "Integrity Impact";
+  private static final String CVSS_AVAIL_IMPACT = "Availability Impact";
   
   private String fCvssAccessVector;
   private String fCvssAccessComplexity;
@@ -41,7 +49,7 @@ public class ScapSyncCveCvssRest implements IScapSyncCvss {
     }
   }
   
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCvss#getAccessVector()
    */
   @Override
@@ -49,7 +57,7 @@ public class ScapSyncCveCvssRest implements IScapSyncCvss {
     return fCvssAccessVector;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCvss#getAccessComplexity()
    */
   @Override
@@ -57,7 +65,7 @@ public class ScapSyncCveCvssRest implements IScapSyncCvss {
     return fCvssAccessComplexity;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCvss#getAuthentication()
    */
   @Override
@@ -65,7 +73,7 @@ public class ScapSyncCveCvssRest implements IScapSyncCvss {
     return fAuthentication;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCvss#getConfImpact()
    */
   @Override
@@ -73,7 +81,7 @@ public class ScapSyncCveCvssRest implements IScapSyncCvss {
     return fConfImpact;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCvss#getIntegImpact()
    */
   @Override
@@ -81,7 +89,7 @@ public class ScapSyncCveCvssRest implements IScapSyncCvss {
     return fIntegImpact;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCvss#getAvailImpact()
    */
   @Override

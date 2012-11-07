@@ -9,12 +9,15 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchSortField;
 
 /**
+ * Rest Implementation of a ScapSync Sort Field
+ * 
+ * Example json:
+ * {"selected":false,"name":"Modification Date (Newest First)"}
  * @author boeboe
- *
  */
 public class ScapSyncSearchSortFieldRest implements IScapSyncSearchSortField {
-  private static String SELECTED = "selected";
-  private static String NAME = "name";
+  private static final String SELECTED = "selected";
+  private static final String NAME = "name";
 
   private boolean fSelected;
   private String fName;
@@ -29,7 +32,7 @@ public class ScapSyncSearchSortFieldRest implements IScapSyncSearchSortField {
     }
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchSortField#getSelected()
    */
   @Override
@@ -37,7 +40,7 @@ public class ScapSyncSearchSortFieldRest implements IScapSyncSearchSortField {
     return fSelected;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchSortField#getName()
    */
   @Override

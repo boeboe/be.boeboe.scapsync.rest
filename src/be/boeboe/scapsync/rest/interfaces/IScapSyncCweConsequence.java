@@ -5,10 +5,6 @@ package be.boeboe.scapsync.rest.interfaces;
 
 /**
  * Interface to represent a ScapSync CWE Consequence
- * 
- * Example json:
- * { "impact" : "Execute unauthorized ...", "scope" : "Integrity, Conf...",
- * "notes" : "If the memory accessible by the attacker ..." }
  * @author boeboe
  */
 public interface IScapSyncCweConsequence {

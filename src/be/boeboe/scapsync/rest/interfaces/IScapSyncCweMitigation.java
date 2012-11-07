@@ -5,13 +5,6 @@ package be.boeboe.scapsync.rest.interfaces;
 
 /**
  * Interface to represent a ScapSync CWE Mitigation
- * 
- * Example json:
- * { "phase" : "Requirements", "description" : "Use a language...",
- *   "strategy" : "Language Selection" }
- * { "phase" : "Build and Compilation", "notes" : "This is not ...",
- *   "effectiveness" : "Defense in Depth", "description" : "Run or ...",
- *   "strategy" : "Compilation or Build Hardening" }
  * @author boeboe
  */
 public interface IScapSyncCweMitigation {

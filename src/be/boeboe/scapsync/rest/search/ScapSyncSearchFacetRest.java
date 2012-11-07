@@ -9,13 +9,18 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchFacet;
 
 /**
+ * Rest Implementation of a ScapSync Facet
+ * 
+ * Example json:
+ * { "values":[{"selected":true,"count":11,
+ *   "name":"Vulnerability","url":"/search?q=nginx"}],
+ *   "name":"Type"}
  * @author boeboe
- *
  */
 public class ScapSyncSearchFacetRest implements IScapSyncSearchFacet {
-  private static String SELECTED = "selected";
+  private static final String SELECTED = "selected";
   protected static String NAME = "name";
-  private static String URL = "url";
+  private static final String URL = "url";
   protected static String VALUES = "values";
 
   private boolean fSelected;
@@ -37,7 +42,7 @@ public class ScapSyncSearchFacetRest implements IScapSyncSearchFacet {
     fName = baseName + " " + fName;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchFacet#getSelected()
    */
   @Override
@@ -45,7 +50,7 @@ public class ScapSyncSearchFacetRest implements IScapSyncSearchFacet {
     return fSelected;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchFacet#getName()
    */
   @Override
@@ -53,7 +58,7 @@ public class ScapSyncSearchFacetRest implements IScapSyncSearchFacet {
     return fName;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchFacet#getUrl()
    */
   @Override

@@ -7,10 +7,6 @@ import java.util.Date;
 
 /**
  * Interface to represent a ScapSync CWE History
- * 
- * Example json:
- * { "date" : "2008-07-01T00:00:00Z", "organization" : "Cigital",
- *   "modifier" : "Eric Dalci", "comment" : "updated Time_of_Introduction" }
  * @author boeboe
  */
 public interface IScapSyncCweHistory {

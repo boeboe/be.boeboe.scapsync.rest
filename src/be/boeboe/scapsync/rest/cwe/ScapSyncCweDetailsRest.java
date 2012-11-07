@@ -10,40 +10,62 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import be.boeboe.scapsync.rest.ScapSyncUtils;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncCweAlternateTerm;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweAttackPattern;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweConsequence;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncCweDemonstrativeExample;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetectionMethod;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweHistory;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweMitigation;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweObservedExample;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncCwePlatforms;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweReference;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncCweRelationship;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweTaxonomy;
 
 /**
+ * Rest Implementation of a ScapSync CWE
+ * 
+ * Example json:
+ * { "observed_examples" : [ { ... } ], "detection_methods" : [ { ... } ],
+ *   "attack_patterns" : [ { ... } ], "mitigations" : [ { ... } ],
+ *   "upstream_modified" : "2012-05-11T00:00:00Z", "cwe_id" : "CWE-119",
+ *   "references" : [ {...} ], "cwe_type" : "Weakness",
+ *   "affected_resources" : [ "Memory" ], "description" : "Certain ...",
+ *   "version_count" : 1, "summary" : "The software performs ...",
+ *   "version_url" : "/versions/cwe/CWE-119",
+ *   "time_of_introduction" : [ "Architecture and Design", ... ],
+ *   "likelihood_of_exploit" : "High", "history" : [ { ... } ],
+ *   "taxonomy_mappings" : [ { ... } ], "consequences" : [ { ... } ],
+ *   "relationships" : [ { ...} ], "alternate_terms" : [ { ... } ],
+ *   "platforms" : { ... }, "demonstrative_examples" : [ { ... } ] }
  * @author boeboe
- *
  */
 public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
-  private static String OBSERVED_EXAMPLES = "observed_examples";
-  private static String DETECTION_METHODS = "detection_methods";
-  private static String ATTACK_PATTERNS = "attack_patterns";
-  private static String MITIGATIONS = "mitigations";
-  private static String REFERENCES = "references";
-  private static String TAXONOMY_MAPPINGS = "taxonomy_mappings";
-  private static String CONSEQUENCES = "consequences";
-  private static String HISTORY = "history";
+  private static final String OBSERVED_EXAMPLES = "observed_examples";
+  private static final String DETECTION_METHODS = "detection_methods";
+  private static final String ATTACK_PATTERNS = "attack_patterns";
+  private static final String MITIGATIONS = "mitigations";
+  private static final String REFERENCES = "references";
+  private static final String TAXONOMY_MAPPINGS = "taxonomy_mappings";
+  private static final String CONSEQUENCES = "consequences";
+  private static final String HISTORY = "history";
+  private static final String RELATIONSHIPS = "relationships";
+  private static final String ALTERNATE_TERMS = "alternate_terms";
+  private static final String PLATFORMS = "platforms";
+  private static final String DEMONSTRATIVE_EXAMPLES = "demonstrative_examples";
   
-  private static String UPSTREAM_MODIFIED = "upstream_modified";
-  private static String CWE_ID = "cwe_id";
-  private static String CWE_TYPE = "cwe_type";
-  private static String AFFECTED_RESOURCES = "affected_resources";
-  private static String DESCRIPTION = "description";
-  private static String VERSION_COUNT = "version_count";
-  private static String SUMMARY = "summary";
-  private static String VERSION_URL = "version_url";
-  private static String TIME_OF_INTRODUCTION = "time_of_introduction";
-  private static String LIKELIHOOD_OF_EXPLOIT = "likelihood_of_exploit";
+  private static final String UPSTREAM_MODIFIED = "upstream_modified";
+  private static final String CWE_ID = "cwe_id";
+  private static final String CWE_TYPE = "cwe_type";
+  private static final String AFFECTED_RESOURCES = "affected_resources";
+  private static final String DESCRIPTION = "description";
+  private static final String VERSION_COUNT = "version_count";
+  private static final String SUMMARY = "summary";
+  private static final String VERSION_URL = "version_url";
+  private static final String TIME_OF_INTRODUCTION = "time_of_introduction";
+  private static final String LIKELIHOOD_OF_EXPLOIT = "likelihood_of_exploit";
   
   private IScapSyncCweObservedExample[] fObservedExamples;
   private IScapSyncCweDetectionMethod[] fDetectionMethods;
@@ -53,6 +75,9 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
   private IScapSyncCweTaxonomy[] fTaxonomyMappings;
   private IScapSyncCweConsequence[] fConsequences;
   private IScapSyncCweHistory[] fHistrories;
+  private IScapSyncCweRelationship[] fRelationships;
+  private IScapSyncCweDemonstrativeExample[] fDemonstrativeExamples;
+  private IScapSyncCweAlternateTerm[] fAlternateTerms;
   
   private Date fUpstreamModified;
   private String fCweId;
@@ -64,6 +89,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
   private String fVersionUrl;
   private String[] fTimesOfIntroduction;
   private String fLikelihoodOfExploit;
+  private IScapSyncCwePlatforms fPlatforms;
   
   public ScapSyncCweDetailsRest(JSONObject scapSyncCweDetailsRest) {
     super();
@@ -113,16 +139,10 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
       }
       
       JSONArray affectedResources = scapSyncCweDetailsRest.getJSONArray(AFFECTED_RESOURCES);
-      fAffectedResources = new String[affectedResources.length()];
-      for ( int i = 0 ; i < affectedResources.length(); i++) {
-        fAffectedResources[i] = affectedResources.getString(i);
-      }
+      fAffectedResources = ScapSyncUtils.getStringArray(affectedResources);
 
       JSONArray timesOfIntroduction = scapSyncCweDetailsRest.getJSONArray(TIME_OF_INTRODUCTION);
-      fTimesOfIntroduction = new String[timesOfIntroduction.length()];
-      for ( int i = 0 ; i < timesOfIntroduction.length(); i++) {
-        fTimesOfIntroduction[i] = timesOfIntroduction.getString(i);
-      }
+      fTimesOfIntroduction = ScapSyncUtils.getStringArray(timesOfIntroduction);
 
       JSONArray taxonomyMappings = scapSyncCweDetailsRest.getJSONArray(TAXONOMY_MAPPINGS);
       fTaxonomyMappings = new IScapSyncCweTaxonomy[taxonomyMappings.length()];
@@ -144,12 +164,36 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
         fHistrories[i] =
             new ScapSyncCweHistoryRest(histories.getJSONObject(i));
       }
+
+      JSONArray relationships = scapSyncCweDetailsRest.getJSONArray(RELATIONSHIPS);
+      fRelationships = new IScapSyncCweRelationship[relationships.length()];
+      for ( int i = 0 ; i < relationships.length(); i++) {
+        fRelationships[i] =
+            new ScapSyncCweRelationshipRest(relationships.getJSONObject(i));
+      }
+
+      JSONArray alternateTerms = scapSyncCweDetailsRest.getJSONArray(ALTERNATE_TERMS);
+      fAlternateTerms = new IScapSyncCweAlternateTerm[alternateTerms.length()];
+      for ( int i = 0 ; i < alternateTerms.length(); i++) {
+        fAlternateTerms[i] =
+            new ScapSyncCweAlternateTermRest(alternateTerms.getJSONObject(i));
+      }
+
+      JSONObject platforms = scapSyncCweDetailsRest.getJSONObject(PLATFORMS);
+      fPlatforms = new ScapSyncCwePlatformsRest(platforms);
+
+      JSONArray demonstrativeExamples = scapSyncCweDetailsRest.getJSONArray(DEMONSTRATIVE_EXAMPLES);
+      fDemonstrativeExamples = new IScapSyncCweDemonstrativeExample[demonstrativeExamples.length()];
+      for ( int i = 0 ; i < demonstrativeExamples.length(); i++) {
+        fDemonstrativeExamples[i] =
+            new ScapSyncCweDemonstrativeExampleRest(demonstrativeExamples.getJSONObject(i));
+      }
     } catch (JSONException e) {
       e.printStackTrace();
     }
   }
   
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getObservedExamples()
    */
   @Override
@@ -157,7 +201,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fObservedExamples;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getDetectionMethods()
    */
   @Override
@@ -165,7 +209,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fDetectionMethods;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getAttackPattern
    */
   @Override
@@ -173,7 +217,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fAttackPatterns;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getMitigations
    */
   @Override
@@ -181,7 +225,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fMitigations;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getReferences
    */
   @Override
@@ -189,7 +233,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fReferences;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getTaxonomyMappings
    */
   @Override
@@ -197,7 +241,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fTaxonomyMappings;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getConsequences
    */
   @Override
@@ -205,7 +249,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fConsequences;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getHistory
    */
   @Override
@@ -213,7 +257,31 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fHistrories;
   }
 
-  /** (non-Javadoc)
+  /**
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getRelationships
+   */
+  @Override
+  public IScapSyncCweRelationship[] getRelationships() {
+    return fRelationships;
+  }
+
+  /**
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getAlternateTerms()
+   */
+  @Override
+  public IScapSyncCweAlternateTerm[] getAlternateTerms() {
+    return fAlternateTerms;
+  }
+
+  /**
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getDemonstrativeExamples()
+   */
+  @Override
+  public IScapSyncCweDemonstrativeExample[] getDemonstrativeExamples() {
+    return fDemonstrativeExamples;
+  }
+
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getUpstreamModified()
    */
   @Override
@@ -221,7 +289,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fUpstreamModified;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getCweId()
    */
   @Override
@@ -229,7 +297,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fCweId;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getCweType()
    */
   @Override
@@ -237,7 +305,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fCweType;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getCweAffectedResources()
    */
   @Override
@@ -245,7 +313,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fAffectedResources;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getCweDescription()
    */
   @Override
@@ -253,7 +321,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fDescription;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getCweVersionCount()
    */
   @Override
@@ -261,7 +329,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fVersionCount;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getCweSummary()
    */
   @Override
@@ -269,7 +337,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fSummary;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getCweVersionUrl()
    */
   @Override
@@ -277,7 +345,7 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fVersionUrl;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getCweTimesOfIntroduction()
    */
   @Override
@@ -285,11 +353,19 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
     return fTimesOfIntroduction;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getCweLikelihoodOfExploit()
    */
   @Override
   public String getCweLikelihoodOfExploit() {
     return fLikelihoodOfExploit;
+  }
+
+  /**
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails#getPlatforms()
+   */
+  @Override
+  public IScapSyncCwePlatforms getPlatforms() {
+    return fPlatforms;
   }
 }

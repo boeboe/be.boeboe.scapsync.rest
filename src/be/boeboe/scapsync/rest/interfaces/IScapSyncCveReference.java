@@ -4,11 +4,6 @@ import java.net.URI;
 
 /**
  * Interface to represent a ScapSync Reference
- * 
- * Example json:
- * { "url" : "http://www.kb.cert.org/vuls/id/180065",
- *   "source" : "CERT-VN", 
- *   "id" : "VU#180065" }
  * @author boeboe
  */
 public interface IScapSyncCveReference {

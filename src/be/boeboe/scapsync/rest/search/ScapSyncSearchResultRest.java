@@ -13,16 +13,24 @@ import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResultType;
 
 /**
+ * Rest Implementation of a ScapSync Result
+ * 
+ * Example json:
+ * {"id":"CVE-2009-2629",
+ *      "summary_text":"CWE-119 through 0.5.37, 0.6.x before...",
+ *      "title_text":"Buffer underflow in...",
+ *      "type":"cve",
+ *      "url":"/cve/CVE-2009-2629",
+ *      "modified":"2009-12-19T06:56:44Z"}
  * @author boeboe
- *
  */
 public class ScapSyncSearchResultRest implements IScapSyncSearchResult {
-  private static String ID = "id";
-  private static String SUMMARY_TEXT = "summary_text";
-  private static String TITLE_TEXT = "title_text";
-  private static String TYPE = "type";
-  private static String URL = "url";
-  private static String MODIFIED_DATE = "modified";
+  private static final String ID = "id";
+  private static final String SUMMARY_TEXT = "summary_text";
+  private static final String TITLE_TEXT = "title_text";
+  private static final String TYPE = "type";
+  private static final String URL = "url";
+  private static final String MODIFIED_DATE = "modified";
 
   private String fId;
   private String fSummaryText;
@@ -45,7 +53,7 @@ public class ScapSyncSearchResultRest implements IScapSyncSearchResult {
     }
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult#getId()
    */
   @Override
@@ -53,7 +61,7 @@ public class ScapSyncSearchResultRest implements IScapSyncSearchResult {
     return fId;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult#getSummaryText()
    */
   @Override
@@ -61,7 +69,7 @@ public class ScapSyncSearchResultRest implements IScapSyncSearchResult {
     return fSummaryText;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult#getTitleText()
    */
   @Override
@@ -69,7 +77,7 @@ public class ScapSyncSearchResultRest implements IScapSyncSearchResult {
     return fTitleText;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult#getUrl()
    */
   @Override
@@ -77,7 +85,7 @@ public class ScapSyncSearchResultRest implements IScapSyncSearchResult {
     return fUrl;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult#getType()
    */
   @Override
@@ -85,7 +93,7 @@ public class ScapSyncSearchResultRest implements IScapSyncSearchResult {
     return fType;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult#getModifiedDate()
    */
   @Override

@@ -5,12 +5,6 @@ package be.boeboe.scapsync.rest.interfaces;
 
 /**
  * Interface to represent a ScapSync CWE Taxonomy
- * 
- * Example json:
- * { "taxonomy" : "PLOVER", "name" : "Path Traversal" }
- * { "taxonomy" : "OWASP Top Ten 2007",
- *   "name" : "Insecure Direct Object Reference",
- *   "fit" : "CWE_More_Specific", "id" : "A4" }
  * @author boeboe
  */
 public interface IScapSyncCweTaxonomy {

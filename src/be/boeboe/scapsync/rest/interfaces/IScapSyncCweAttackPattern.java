@@ -7,10 +7,6 @@ import java.net.URI;
 
 /**
  * Interface to represent a ScapSync CWE Attack Pattern
- * 
- * Example json:
- * { "url" : "http://capec.mitre.org/data/definitions/139.html", 
- *   "id" : "CAPEC-139" }
  * @author boeboe
  */
 public interface IScapSyncCweAttackPattern {

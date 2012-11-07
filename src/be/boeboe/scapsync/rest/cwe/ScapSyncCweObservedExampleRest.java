@@ -9,14 +9,17 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweObservedExample;
 
 /**
+ * Rest Implementation of a ScapSync CWE Observed Example
+ * 
+ * Example json:
+ * { "url" : "/cve/CVE-2009-2550", "description" : "Classic stack-based ...",
+ *   "cve_id" : "CVE-2009-2550" }
  * @author boeboe
- *
  */
-public class ScapSyncCweObservedExampleRest implements
-    IScapSyncCweObservedExample {
-  private static String URL = "url";
-  private static String DESCRIPTION = "description";
-  private static String CVE_ID = "cve_id";
+public class ScapSyncCweObservedExampleRest implements IScapSyncCweObservedExample {
+  private static final String URL = "url";
+  private static final String DESCRIPTION = "description";
+  private static final String CVE_ID = "cve_id";
   
   private String furl;
   private String fDescription;
@@ -33,7 +36,7 @@ public class ScapSyncCweObservedExampleRest implements
     }
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweObservedExample#getUrl()
    */
   @Override
@@ -41,7 +44,7 @@ public class ScapSyncCweObservedExampleRest implements
     return furl;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweObservedExample#getDescription()
    */
   @Override
@@ -49,7 +52,7 @@ public class ScapSyncCweObservedExampleRest implements
     return fDescription;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweObservedExample#getCveId()
    */
   @Override

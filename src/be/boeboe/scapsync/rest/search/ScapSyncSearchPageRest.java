@@ -9,12 +9,15 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchPage;
 
 /**
+ * Rest Implementation of a ScapSync Search Page
+ * 
+ * Example json:
+ * {"name":1,"url":"/search?q=nginx&s=0&solrDocumentType=cve&n=10"}
  * @author boeboe
- *
  */
 public class ScapSyncSearchPageRest implements IScapSyncSearchPage {
-  private static String NAME = "name";
-  private static String URL = "url";
+  private static final String NAME = "name";
+  private static final String URL = "url";
 
   private int fName;
   private String fUrl;
@@ -29,7 +32,7 @@ public class ScapSyncSearchPageRest implements IScapSyncSearchPage {
     }
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchPage#getName()
    */
   @Override
@@ -37,7 +40,7 @@ public class ScapSyncSearchPageRest implements IScapSyncSearchPage {
     return fName;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearchPage#getUrl()
    */
   @Override

@@ -30,8 +30,8 @@ import be.boeboe.scapsync.rest.search.ScapSyncSearchRest;
  * @author boeboe
  */
 public class ScapSyncSearcher {
-  private static URI SCAP_SYNC_BASE_URL = URI.create("http://scapsync.com");
-  private static String SEARCH_PATTERN = "search_url";
+  private static final URI SCAP_SYNC_BASE_URL = URI.create("http://scapsync.com");
+  private static final String SEARCH_PATTERN = "search_url";
   
   private final DefaultHttpClient fHttpClient;
   private URI fSearchBaseUri;

@@ -9,14 +9,20 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweTaxonomy;
 
 /**
+ * Rest Implementation of a ScapSync CWE Taxonomy
+ * 
+ * Example json:
+ * { "taxonomy" : "PLOVER", "name" : "Path Traversal" }
+ * { "taxonomy" : "OWASP Top Ten 2007",
+ *   "name" : "Insecure Direct Object Reference",
+ *   "fit" : "CWE_More_Specific", "id" : "A4" }
  * @author boeboe
- *
  */
 public class ScapSyncCweTaxonomyRest implements IScapSyncCweTaxonomy {
-  private static String TAXONOMY = "taxonomy";
-  private static String NAME = "name";
-  private static String FIT = "fit";
-  private static String ID = "id";
+  private static final String TAXONOMY = "taxonomy";
+  private static final String NAME = "name";
+  private static final String FIT = "fit";
+  private static final String ID = "id";
 
   private String fTaxonomy;
   private String fName;
@@ -35,7 +41,7 @@ public class ScapSyncCweTaxonomyRest implements IScapSyncCweTaxonomy {
     }
   }
   
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweTaxonomy#getTaxonomy()
    */
   @Override
@@ -43,7 +49,7 @@ public class ScapSyncCweTaxonomyRest implements IScapSyncCweTaxonomy {
     return fTaxonomy;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweTaxonomy#getName()
    */
   @Override
@@ -51,7 +57,7 @@ public class ScapSyncCweTaxonomyRest implements IScapSyncCweTaxonomy {
     return fName;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweTaxonomy#getFit()
    */
   @Override
@@ -59,7 +65,7 @@ public class ScapSyncCweTaxonomyRest implements IScapSyncCweTaxonomy {
     return fFit;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweTaxonomy#getId()
    */
   @Override

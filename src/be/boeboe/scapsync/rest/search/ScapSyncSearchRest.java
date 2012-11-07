@@ -17,20 +17,26 @@ import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchSortField;
 
 /**
+ * Rest Implementation of a ScapSync Search
+ * 
+ * Example JSON:
+ * { "rows_per_page" : 10, "sort_fields" : [ { ... } ], "start_row" : 0,
+ *   "total_rows" : 11, "facets" : [ { ... } ], "current_page" : 0,
+ *   "results" : [ { ... } ], "end_row" : 10, "search_url" : "/search",
+ *   "pages" : [ { ... } ] }
  * @author boeboe
- *
  */
 public class ScapSyncSearchRest implements IScapSyncSearch {
-  private static String ROWS_PER_PAGE = "rows_per_page";
-  private static String SORT_FIELDS = "sort_fields";
-  private static String START_ROW = "start_row";
-  private static String TOTAL_ROWS = "total_rows";
-  private static String FACETS = "facets";
-  private static String CURRENT_PAGE = "current_page";
-  private static String RESULS = "results";
-  private static String END_ROW = "end_row";
-  private static String SEARCH_URL = "search_url";
-  private static String PAGES = "pages";
+  private static final String ROWS_PER_PAGE = "rows_per_page";
+  private static final String SORT_FIELDS = "sort_fields";
+  private static final String START_ROW = "start_row";
+  private static final String TOTAL_ROWS = "total_rows";
+  private static final String FACETS = "facets";
+  private static final String CURRENT_PAGE = "current_page";
+  private static final String RESULS = "results";
+  private static final String END_ROW = "end_row";
+  private static final String SEARCH_URL = "search_url";
+  private static final String PAGES = "pages";
 
   private int fRowsPerPage;
   private IScapSyncSearchSortField[] fSortFields;
@@ -92,7 +98,6 @@ public class ScapSyncSearchRest implements IScapSyncSearch {
   }
 
   /**
-   *  (non-Javadoc)
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearch#getSearchUrl()
    */
   @Override
@@ -100,7 +105,7 @@ public class ScapSyncSearchRest implements IScapSyncSearch {
     return fSearchUrl;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearch#getRowsPerPage()
    */
   @Override
@@ -108,7 +113,7 @@ public class ScapSyncSearchRest implements IScapSyncSearch {
     return fRowsPerPage;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearch#getStartRow()
    */
   @Override
@@ -116,7 +121,7 @@ public class ScapSyncSearchRest implements IScapSyncSearch {
     return fStartRow;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearch#getEndRow()
    */
   @Override
@@ -124,7 +129,7 @@ public class ScapSyncSearchRest implements IScapSyncSearch {
     return fEndRow;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearch#getTotalRows()
    */
   @Override
@@ -132,7 +137,7 @@ public class ScapSyncSearchRest implements IScapSyncSearch {
     return fTotalRows;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearch#getCurrentPage()
    */
   @Override
@@ -140,7 +145,7 @@ public class ScapSyncSearchRest implements IScapSyncSearch {
     return fCurrentPage;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearch#getSortFields()
    */
   @Override
@@ -148,7 +153,7 @@ public class ScapSyncSearchRest implements IScapSyncSearch {
     return fSortFields;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearch#getFacets()
    */
   @Override
@@ -156,7 +161,7 @@ public class ScapSyncSearchRest implements IScapSyncSearch {
     return fFacets;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearch#getResults()
    */
   @Override
@@ -164,7 +169,7 @@ public class ScapSyncSearchRest implements IScapSyncSearch {
     return fResults;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearch#getPages()
    */
   @Override

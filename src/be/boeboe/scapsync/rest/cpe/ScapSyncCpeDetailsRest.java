@@ -10,13 +10,23 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.ScapSyncUtils;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCpeDetails;
 
+/**
+ * Rest Implementation of a ScapSync CPE
+ * 
+ * Example json:
+ * { "status" : "draft", "name" : "cpe:/a:openssl:openssl:0.9.6k",
+ *   "version_count" : 1, "upstream_modified" : "2008-03-25T19:16:29.693Z",
+ *   "titles" : [ "[English] OpenSSL Project OpenSSL 0.9.6k" ],
+ *   "version_url" : "/versions/cpe/cpe:/a:openssl:openssl:0.9.6k" }
+ * @author boeboe
+ */
 public class ScapSyncCpeDetailsRest implements IScapSyncCpeDetails {
-  private static String STATUS = "status";
-  private static String NAME = "name";
-  private static String VERSION_COUNT = "version_count";
-  private static String UPSTREAM_MODIFIED = "upstream_modified";
-  private static String TITLES = "titles";
-  private static String VERSION_URL = "version_url";
+  private static final String STATUS = "status";
+  private static final String NAME = "name";
+  private static final String VERSION_COUNT = "version_count";
+  private static final String UPSTREAM_MODIFIED = "upstream_modified";
+  private static final String TITLES = "titles";
+  private static final String VERSION_URL = "version_url";
   
   private String fStatus;
   private String fName;
@@ -45,7 +55,7 @@ public class ScapSyncCpeDetailsRest implements IScapSyncCpeDetails {
     }
   }
   
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCpeDetails#getStatus()
    */
   @Override
@@ -53,7 +63,7 @@ public class ScapSyncCpeDetailsRest implements IScapSyncCpeDetails {
     return fStatus;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCpeDetails#getName()
    */
   @Override
@@ -61,7 +71,7 @@ public class ScapSyncCpeDetailsRest implements IScapSyncCpeDetails {
     return fName;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCpeDetails#getVersionCount()
    */
   @Override
@@ -69,7 +79,7 @@ public class ScapSyncCpeDetailsRest implements IScapSyncCpeDetails {
     return fVersionCount;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCpeDetails#getUpstreamModfied()
    */
   @Override
@@ -77,7 +87,7 @@ public class ScapSyncCpeDetailsRest implements IScapSyncCpeDetails {
     return fUpstreamModified;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCpeDetails#getTitles()
    */
   @Override
@@ -85,7 +95,7 @@ public class ScapSyncCpeDetailsRest implements IScapSyncCpeDetails {
     return fTitles;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCpeDetails#getVersionUrl()
    */
   @Override

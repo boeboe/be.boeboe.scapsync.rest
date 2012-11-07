@@ -11,13 +11,18 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCveReference;
 
 /**
+ * Rest Implementation of a ScapSync Reference
+ * 
+ * Example json:
+ * { "url" : "http://www.kb.cert.org/vuls/id/180065",
+ *   "source" : "CERT-VN", 
+ *   "id" : "VU#180065" }
  * @author boeboe
- *
  */
 public class ScapSyncCveReferenceRest implements IScapSyncCveReference {
-  private static String URL = "url";
-  private static String SOURCE = "source";
-  private static String ID = "id";
+  private static final String URL = "url";
+  private static final String SOURCE = "source";
+  private static final String ID = "id";
   
   private URI furl;
   private String fSource;
@@ -34,7 +39,7 @@ public class ScapSyncCveReferenceRest implements IScapSyncCveReference {
     }
   }
   
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCveReference#getId()
    */
   @Override
@@ -42,7 +47,7 @@ public class ScapSyncCveReferenceRest implements IScapSyncCveReference {
     return fId;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCveReference#getSource()
    */
   @Override
@@ -50,7 +55,7 @@ public class ScapSyncCveReferenceRest implements IScapSyncCveReference {
     return fSource;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCveReference#getUrl()
    */
   @Override

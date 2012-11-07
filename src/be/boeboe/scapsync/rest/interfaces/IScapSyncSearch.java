@@ -5,12 +5,6 @@ package be.boeboe.scapsync.rest.interfaces;
 
 /**
  *  Interface to represent a ScapSync Search
- * 
- * Example JSON:
- * { "rows_per_page" : 10, "sort_fields" : [ { ... } ], "start_row" : 0,
- *   "total_rows" : 11, "facets" : [ { ... } ], "current_page" : 0,
- *   "results" : [ { ... } ], "end_row" : 10, "search_url" : "/search",
- *   "pages" : [ { ... } ] }
  * @author boeboe
  */
 public interface IScapSyncSearch {

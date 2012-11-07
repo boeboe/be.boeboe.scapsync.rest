@@ -9,14 +9,18 @@ import be.boeboe.scapsync.rest.ScapSyncUtils;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweHistory;
 
 /**
+ * Rest Implementation of a ScapSync CWE History
+ * 
+ * Example json:
+ * { "date" : "2008-07-01T00:00:00Z", "organization" : "Cigital",
+ *   "modifier" : "Eric Dalci", "comment" : "updated Time_of_Introduction" }
  * @author boeboe
- *
  */
 public class ScapSyncCweHistoryRest implements IScapSyncCweHistory {
-  private static String DATE = "date";
-  private static String ORGANIZATION = "organization";
-  private static String MODIFIER = "modifier";
-  private static String COMMENT = "comment";
+  private static final String DATE = "date";
+  private static final String ORGANIZATION = "organization";
+  private static final String MODIFIER = "modifier";
+  private static final String COMMENT = "comment";
 
   private Date fDate;
   private String fOrganization;
@@ -35,7 +39,7 @@ public class ScapSyncCweHistoryRest implements IScapSyncCweHistory {
     }
   }
   
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweHistory#getDate()
    */
   @Override
@@ -43,7 +47,7 @@ public class ScapSyncCweHistoryRest implements IScapSyncCweHistory {
     return fDate;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweHistory#getOrganization()
    */
   @Override
@@ -51,7 +55,7 @@ public class ScapSyncCweHistoryRest implements IScapSyncCweHistory {
     return fOrganization;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweHistory#getModifier()
    */
   @Override
@@ -59,7 +63,7 @@ public class ScapSyncCweHistoryRest implements IScapSyncCweHistory {
     return fModifier;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweHistory#getComment()
    */
   @Override

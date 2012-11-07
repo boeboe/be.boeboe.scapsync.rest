@@ -11,12 +11,16 @@ import org.json.JSONObject;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweAttackPattern;
 
 /**
+ * Rest Implementation of ScapSync CWE Attack Pattern
+ * 
+ * Example json:
+ * { "url" : "http://capec.mitre.org/data/definitions/139.html", 
+ *   "id" : "CAPEC-139" }
  * @author boeboe
- *
  */
 public class ScapSyncCweAttackPatternRest implements IScapSyncCweAttackPattern {
-  private static String URL = "url";
-  private static String ID = "id";
+  private static final String URL = "url";
+  private static final String ID = "id";
 
   private URI fUrl;
   private String fId;
@@ -31,7 +35,7 @@ public class ScapSyncCweAttackPatternRest implements IScapSyncCweAttackPattern {
     }
   }
   
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweAttackPattern#getUrl()
    */
   @Override
@@ -39,7 +43,7 @@ public class ScapSyncCweAttackPatternRest implements IScapSyncCweAttackPattern {
     return fUrl;
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweAttackPattern#getId()
    */
   @Override

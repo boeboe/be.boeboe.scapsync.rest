@@ -4,12 +4,6 @@ import java.util.Date;
 
 /**
  * Interface to represent a ScapSync CPE
- * 
- * Example json:
- * { "status" : "draft", "name" : "cpe:/a:openssl:openssl:0.9.6k",
- *   "version_count" : 1, "upstream_modified" : "2008-03-25T19:16:29.693Z",
- *   "titles" : [ "[English] OpenSSL Project OpenSSL 0.9.6k" ],
- *   "version_url" : "/versions/cpe/cpe:/a:openssl:openssl:0.9.6k" }
  * @author boeboe
  */
 public interface IScapSyncCpeDetails {
