@@ -12,8 +12,13 @@ import java.util.Date;
  * { "observed_examples" : [ { ... } ], "detection_methods" : [ { ... } ],
  *   "attack_patterns" : [ { ... } ], "mitigations" : [ { ... } ],
  *   "upstream_modified" : "2012-05-11T00:00:00Z", "cwe_id" : "CWE-119",
- *   "references" : [ {...} ],
-  "time_of_introduction" : [ "Architecture and Design", "Implementation", "Operation" ],
+ *   "references" : [ {...} ], "cwe_type" : "Weakness",
+ *   "affected_resources" : [ "Memory" ], "description" : "Certain ...",
+ *   "version_count" : 1, "summary" : "The software performs ...",
+ *   "version_url" : "/versions/cwe/CWE-119",
+ *   "time_of_introduction" : [ "Architecture and Design", ... ],
+ *   "likelihood_of_exploit" : "High", "history" : [ { ... } ],
+ *   "taxonomy_mappings" : [ { ... } ], "consequences" : [ { ... } ],
   "relationships" : [ {
     "url" : "/cwe/CWE-118",
     "target_form" : "Weakness",
@@ -28,46 +33,14 @@ import java.util.Date;
     } ]
   }, ... ]
   } ],
-  "cwe_type" : "Weakness",
-  "affected_resources" : [ "Memory" ],
-  "description" : "Certain languages ...",
-  "version_count" : 1,
   "alternate_terms" : [ {
     "name" : "Memory Corruption",
     "description" : "The generic term ..."
   } ],
-  "likelihood_of_exploit" : "High",
-  "taxonomy_mappings" : [ {
-    "taxonomy" : "OWASP Top Ten 2004",
-    "name" : "Buffer Overflows",
-    "fit" : "Exact",
-    "id" : "A5"
-  }, {
-    "taxonomy" : "CERT C Secure Coding",
-    "name" : "Understand how arrays work",
-    "id" : "ARR00-C"
-  }, ...],
-  "consequences" : [ {
-    "impact" : "Execute unauthorized ...",
-    "scope" : "Integrity, Confidentiality, Availability",
-    "notes" : "If the memory accessible by the attacker ..."
-  }, ...],
   "platforms" : {
     "languages" : [ "Languages without memory management support", "C (Often)", "C++ (Often)", "Assembly" ],
     "notes" : "It is possible ..."
   },
-  "summary" : "The software performs ...",
-  "version_url" : "/versions/cwe/CWE-119",
-  "history" : [ {
-    "date" : "2008-07-01T00:00:00Z",
-    "organization" : "Cigital",
-    "modifier" : "Eric Dalci",
-    "comment" : "updated Time_of_Introduction"
-  }, {
-    "date" : "2008-08-15T00:00:00Z",
-    "organization" : "Veracode",
-    "comment" : "Suggested OWASP Top Ten 2004\n                        mapping"
-  }, ...],
   "demonstrative_examples" : [ {
     "body" : "Code example ...",
     "intro" : "This example takes an IP address ..."
@@ -108,6 +81,24 @@ public interface IScapSyncCweDetails {
   public IScapSyncCweReference[] getReferences();
 
   /**
+   * Get an array of Taxonomy Mappings from this CWE.
+   * @return array of IScapSyncCweTaxonomy's for this CWE
+   */
+  public IScapSyncCweTaxonomy[] getTaxonomyMappings();
+
+  /**
+   * Get an array of Consequences from this CWE.
+   * @return array of IScapSyncCweConsequence's for this CWE
+   */
+  public IScapSyncCweConsequence[] getConsequences();
+
+  /**
+   * Get an array of History from this CWE.
+   * @return array of IScapSyncCweHistory's for this CWE
+   */
+  public IScapSyncCweHistory[] getHistory();
+  
+  /**
    * Get the Upstream Modified Date from this CWE.
    * @return date the Upstream Modified Date from this CWE
    */
@@ -118,4 +109,54 @@ public interface IScapSyncCweDetails {
    * @return notes the CWE ID from this CWE
    */
   public String getCweId();
+
+  /**
+   * Get the CWE Type from this CWE.
+   * @return type the CWE Type from this CWE
+   */
+  public String getCweType();
+
+  /**
+   * Get the CWE Affected Resources from this CWE.
+   * @return stringArray the CWE Affected Resources from this CWE
+   */
+  public String[] getCweAffectedResources();
+
+  /**
+   * Get the CWE Description from this CWE.
+   * @return description the CWE Description from this CWE
+   */
+  public String getCweDescription();
+
+  /**
+   * Get the CWE VersionCount from this CWE.
+   * @return int the CWE VersionCount from this CWE
+   */
+  public int getCweVersionCount();
+
+  /**
+   * Get the CWE Summary from this CWE.
+   * @return summary the CWE Summary from this CWE
+   */
+  public String getCweSummary();
+
+  /**
+   * Get the CWE (relative) Version Url from this CWE.
+   * @return url the CWE Version Url from this CWE
+   */
+  public String getCweVersionUrl();
+
+  /**
+   * Get the CWE Times Of Introduction from this CWE.
+   * @return stringArray an array containing the Times Of Introduction from
+   * this CWE
+   */
+  public String[] getCweTimesOfIntroduction();
+
+  /**
+   * Get the CWE Likelihood Of Exploit from this CWE.
+   * @return likelihood the Likelihood Of Exploit from this CWE
+   */
+  public String getCweLikelihoodOfExploit();
+
 }
