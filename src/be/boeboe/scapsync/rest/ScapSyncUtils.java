@@ -33,7 +33,7 @@ public class ScapSyncUtils {
     } else if (scapSyncDate.matches(correctionPattern2)) {
       scapSyncDate = scapSyncDate.replaceAll(correctionPattern2, "$1$3");
     }
-    System.out.println(scapSyncDate);
+
     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
     Date date = new Date();
     try {

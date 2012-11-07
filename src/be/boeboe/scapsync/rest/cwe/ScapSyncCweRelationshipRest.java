@@ -92,8 +92,9 @@ public class ScapSyncCweRelationshipRest implements IScapSyncCweRelationship {
   }
   
   /**
+   * Rest Implementation of a ScapSync CWE Relationship View
+   * 
    * @author boeboe
-   *
    */
   public class ScapSyncCweRelationshipViewRest implements IScapSyncCweRelationshipView {
     private static final String URL = "url";

@@ -18,23 +18,27 @@ import org.json.JSONObject;
 
 import be.boeboe.scapsync.rest.cpe.ScapSyncCpeDetailsRest;
 import be.boeboe.scapsync.rest.cve.ScapSyncCveDetailsRest;
+import be.boeboe.scapsync.rest.cwe.ScapSyncCweDetailsRest;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCpeDetails;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCveDetails;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchPage;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResultType;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher;
 import be.boeboe.scapsync.rest.search.ScapSyncSearchRest;
 
 /**
- * ScapSyncSearcher class.
+ * Rest Implementation of a ScapSyncSearcher.
  * @author boeboe
  */
-public class ScapSyncSearcher {
+public class ScapSyncSearcher implements IScapSyncSearcher {
   private static final URI SCAP_SYNC_BASE_URL = URI.create("http://scapsync.com");
   private static final String SEARCH_PATTERN = "search_url";
   
   private final DefaultHttpClient fHttpClient;
   private URI fSearchBaseUri;
+  private URI fQueryAllBaseUri;
   private URI fQueryCceBaseUri;
   private URI fQueryCpeBaseUri;
   private URI fQueryCveBaseUri;
@@ -47,10 +51,11 @@ public class ScapSyncSearcher {
     
     try {
       fSearchBaseUri = URI.create(jsonMain.getString(SEARCH_PATTERN));
+      fQueryAllBaseUri = URI.create(fSearchBaseUri + "?q=");
       fQueryCceBaseUri = URI.create(fSearchBaseUri + "?solrDocumentType=cce&q=");
       fQueryCpeBaseUri = URI.create(fSearchBaseUri + "?solrDocumentType=cpe&q=");
       fQueryCveBaseUri = URI.create(fSearchBaseUri + "?solrDocumentType=cve&q=");
-      fQueryCweBaseUri = URI.create(fSearchBaseUri + "?solrDocumentType=cce&q=");
+      fQueryCweBaseUri = URI.create(fSearchBaseUri + "?solrDocumentType=cwe&q=");
 
     } catch (JSONException e) {
       throw new RuntimeException("Problem fetching base url patterns", e);
@@ -61,59 +66,45 @@ public class ScapSyncSearcher {
     return fSearchBaseUri.toString();
   }
 
-  
+  /** (non-Javadoc)
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#searchAll(java.lang.String)
+   */
+  public IScapSyncSearchResult[] searchAll(String searchItem) {
+    return recursiveScapSyncSearchResult(fQueryAllBaseUri, searchItem);
+  }
+
   /**
-   * Search for CCE's (Common Configuration Enumeration) or misconfigurations.
-   * CCE provides unique identifiers to system configuration issues in order
-   * to facilitate fast and accurate correlation of configuration data across
-   * multiple information sources and tools. For example, CCE Identifiers can
-   * be used to associate checks in configuration assessment tools with
-   * statements in configuration best-practice.
-   * @return
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#searchCce(java.lang.String)
    */
   public IScapSyncSearchResult[] searchCce(String searchItem) {
     return recursiveScapSyncSearchResult(fQueryCceBaseUri, searchItem);
   }
 
   /**
-   * Search for CPE's (Common Platform Enumeration).
-   * CPE is a structured naming scheme for information technology systems,
-   * software, and packages. Based upon the generic syntax for Uniform
-   * Resource Identifiers (URI), CPE includes a formal name format, a method
-   * for checking names against a system, and a description format for
-   * binding text and tests to a name. 
-   * @param searchItem the item to look for
-   * @return CPE's containing searchItem
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#searchCpe(java.lang.String)
    */
   public IScapSyncSearchResult[] searchCpe(String searchItem) {
     return recursiveScapSyncSearchResult(fQueryCpeBaseUri, searchItem);
   }
 
   /**
-   * Search for CVE's (Common Vulnerabilities and Exposures) or security
-   * related software flaws. CVE is a dictionary of publicly known information
-   * security vulnerabilities and exposures. CVE’s common identifiers enable
-   * data exchange between security products and provide a baseline index point
-   * for evaluating coverage of tools and services.
-   * @param searchItem the item to look for
-   * @return CVE's containing searchItem
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#searchCve(java.lang.String)
    */
   public IScapSyncSearchResult[] searchCve(String searchItem) {
     return recursiveScapSyncSearchResult(fQueryCveBaseUri, searchItem);
   }
-  
+
   /**
-   * Search for CWE's (Common Weakness Enumeration). The Common Weakness
-   * Enumeration Specification (CWE) provides a common language of discourse
-   * for discussing, finding and dealing with the causes of software security
-   * vulnerabilities as they are found in code, design, or system architecture.
-   * Each individual CWE represents a single vulnerability type.
-   * @return
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#searchCwe(java.lang.String)
    */
   public IScapSyncSearchResult[] searchCwe(String searchItem) {
     return recursiveScapSyncSearchResult(fQueryCweBaseUri, searchItem);
   }
-  
+
+  /**
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#getCpeDetails(
+   *          be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult)
+   */
   public IScapSyncCpeDetails getCpeDetails(IScapSyncSearchResult searchResult) {
     if (searchResult.getType() != IScapSyncSearchResultType.TYPE_CPE) {
       return null;
@@ -123,7 +114,11 @@ public class ScapSyncSearcher {
       return new ScapSyncCpeDetailsRest(jsonDetailsResult);
     }
   }
-  
+
+  /**
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#getCveDetails(
+   *          be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult)
+   */
   public IScapSyncCveDetails getCveDetails(IScapSyncSearchResult searchResult) {
     if (searchResult.getType() != IScapSyncSearchResultType.TYPE_CVE) {
       return null;
@@ -134,6 +129,20 @@ public class ScapSyncSearcher {
     }
   }
 
+  /**
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#getCweDetails(
+   *        be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult)
+   */
+  public IScapSyncCweDetails getCweDetails(IScapSyncSearchResult searchResult) {
+    if (searchResult.getType() != IScapSyncSearchResultType.TYPE_CWE) {
+      return null;
+    } else {
+      URI detailsUri = URI.create(SCAP_SYNC_BASE_URL + searchResult.getUrl());
+      JSONObject jsonDetailsResult = execRestGet(detailsUri);
+      return new ScapSyncCweDetailsRest(jsonDetailsResult);
+    }
+  }
+  
   private JSONObject execRestGet(URI uri) {
     HttpGet request = new HttpGet(uri);
     request.addHeader("Accept", "application/json");
