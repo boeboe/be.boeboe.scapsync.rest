@@ -6,7 +6,6 @@ package be.boeboe.scapsync.rest.cwe;
 import java.net.URI;
 import java.util.Date;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,11 +55,9 @@ public class ScapSyncCweReferenceRest implements IScapSyncCweReference {
       fEdition = scapSyncCweReferenceRest.getString(EDITION);
       fSection = scapSyncCweReferenceRest.getString(SECTION);
       fDate = ScapSyncUtils.getDate(scapSyncCweReferenceRest.getString(DATE));
-      fPublicationDate = ScapSyncUtils.getDate(
-          scapSyncCweReferenceRest.getString(PUBLICATION_DATE));
+      fPublicationDate = ScapSyncUtils.getDate(scapSyncCweReferenceRest.getString(PUBLICATION_DATE));
       
-      JSONArray authors = scapSyncCweReferenceRest.getJSONArray(AUTOR);
-      fAutors = ScapSyncUtils.getStringArray(authors);
+      fAutors = ScapSyncUtils.getStringArray(scapSyncCweReferenceRest.getJSONArray(AUTOR));
     } catch (JSONException e) {
       e.printStackTrace();
     }

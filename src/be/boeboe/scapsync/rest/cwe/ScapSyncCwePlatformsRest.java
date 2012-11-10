@@ -3,7 +3,6 @@
  */
 package be.boeboe.scapsync.rest.cwe;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,8 +29,7 @@ public class ScapSyncCwePlatformsRest implements IScapSyncCwePlatforms {
     try {
       fNotes = scapSyncCwePlatformsRest.getString(NOTES);
       
-      JSONArray languages = scapSyncCwePlatformsRest.getJSONArray(LANGUAGES);
-      fLanguages = ScapSyncUtils.getStringArray(languages);
+      fLanguages = ScapSyncUtils.getStringArray(scapSyncCwePlatformsRest.getJSONArray(LANGUAGES));
     } catch (JSONException e) {
       e.printStackTrace();
     }

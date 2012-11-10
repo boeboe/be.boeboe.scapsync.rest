@@ -3,6 +3,7 @@
  */
 package be.boeboe.scapsync.rest;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,7 @@ import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * @author boeboe
@@ -56,5 +58,25 @@ public class ScapSyncUtils {
        stringArray[i] = jsonArray.getString(i);
     }
     return stringArray;
+  }
+
+  /**
+   * A helper method to convert multi dimensional JSONArrays to ObjectArrays
+   * of Class clazz.
+   * @param jsonArray the JSONArray to convert
+   * @return clazzArray and array of Objects from type clazz
+   * @throws JSONException exception during JSON parsing
+   */
+  @SuppressWarnings("unchecked")
+  public static <K> K[] getObjectArray(JSONArray jsonArray, Class<K> clazz) {
+    K[] result = (K[])Array.newInstance(clazz,jsonArray.length());
+    for ( int i = 0 ; i < jsonArray.length(); i++) {
+      try {
+        result[i] = clazz.getConstructor(JSONObject.class).newInstance(jsonArray.getJSONObject(i));
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    return result;
   }
 }

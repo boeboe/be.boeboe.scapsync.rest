@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import be.boeboe.scapsync.rest.ScapSyncUtils;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearch;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchFacet;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchPage;
@@ -58,27 +59,10 @@ public class ScapSyncSearchRest implements IScapSyncSearch {
       fCurrentPage = scapSyncSearchRest.getInt(CURRENT_PAGE);
       fEndRow = scapSyncSearchRest.getInt(END_ROW);
       fSearchUrl = scapSyncSearchRest.getString(SEARCH_URL);
-      
-      JSONArray sortFields = scapSyncSearchRest.getJSONArray(SORT_FIELDS);
-      fSortFields = new IScapSyncSearchSortField[sortFields.length()];
-      for ( int i = 0 ; i < sortFields.length(); i++) {
-        fSortFields[i] =
-            new ScapSyncSearchSortFieldRest(sortFields.getJSONObject(i));
-      }
 
-      JSONArray results = scapSyncSearchRest.getJSONArray(RESULS);
-      fResults = new IScapSyncSearchResult[results.length()];
-      for ( int i = 0 ; i < results.length(); i++) {
-        fResults[i] =
-            new ScapSyncSearchResultRest(results.getJSONObject(i));
-      }
-
-      JSONArray pages = scapSyncSearchRest.getJSONArray(PAGES);
-      fPages = new IScapSyncSearchPage[pages.length()];
-      for ( int i = 0 ; i < pages.length(); i++) {
-        fPages[i] =
-            new ScapSyncSearchPageRest(pages.getJSONObject(i));
-      }
+      fSortFields = ScapSyncUtils.getObjectArray(scapSyncSearchRest.getJSONArray(SORT_FIELDS), ScapSyncSearchSortFieldRest.class);
+      fResults = ScapSyncUtils.getObjectArray(scapSyncSearchRest.getJSONArray(RESULS), ScapSyncSearchResultRest.class);
+      fPages = ScapSyncUtils.getObjectArray(scapSyncSearchRest.getJSONArray(PAGES), ScapSyncSearchPageRest.class);
 
       List<IScapSyncSearchFacet> facetList = new ArrayList<IScapSyncSearchFacet>();
       JSONArray facetGroups = scapSyncSearchRest.getJSONArray(FACETS);

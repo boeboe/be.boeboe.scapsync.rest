@@ -24,7 +24,7 @@ public class JsonPlayGround {
     }
 
     System.out.println("\n\n=== Looking for openssl CVE ===");
-    for (IScapSyncSearchResult r : searcher.searchCve("openssl")) {
+    for (IScapSyncSearchResult r : searcher.searchCve("nginx")) {
       System.out.println("RES: " + r.toString());
       
       IScapSyncCveDetails det = searcher.getCveDetails(r);
@@ -39,17 +39,17 @@ public class JsonPlayGround {
       System.out.println("DETAILS: " + det.toString());
     }
 
-//    System.out.println("\n\n=== Looking for nginx CVE ===");
-//    for (IScapSyncSearchResult r : searcher.searchCve("nginx")) {
-//      System.out.println("RES: " + r.toString());
-//      
-//      IScapSyncCveDetails det = searcher.getCveDetails(r);
-//      System.out.println("DETAILS: " + det.toString());
-//      System.out.println("CVSS: " + det.getCvss());
-//      
-//      for (IScapSyncReference ref : det.getRefences()) {
-//        System.out.println("REF: " + ref.toString());
-//      }
-//    }
+    System.out.println("\n\n=== Looking for nginx CVE ===");
+    for (IScapSyncSearchResult r : searcher.searchCve("nginx")) {
+      System.out.println("RES: " + r.toString());
+      
+      IScapSyncCveDetails det = searcher.getCveDetails(r);
+      System.out.println("DETAILS: " + det.toString());
+      System.out.println("CVSS: " + det.getCvss());
+      
+      for (IScapSyncCveReference ref : det.getRefences()) {
+        System.out.println("REF: " + ref.toString());
+      }
+    }
   }
 }

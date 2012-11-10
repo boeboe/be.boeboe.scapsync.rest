@@ -3,10 +3,10 @@
  */
 package be.boeboe.scapsync.rest.cwe;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import be.boeboe.scapsync.rest.ScapSyncUtils;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweRelationship;
 
 /**
@@ -39,13 +39,8 @@ public class ScapSyncCweRelationshipRest implements IScapSyncCweRelationship {
       fTargetForm = scapSyncCweRelationshipRest.getString(TARGET_FORM);
       fTargetId = scapSyncCweRelationshipRest.getString(TARGET_ID);
       fNature = scapSyncCweRelationshipRest.getString(NATURE);
-      
-      JSONArray views = scapSyncCweRelationshipRest.getJSONArray(VIEWS);
-      fViews = new IScapSyncCweRelationshipView[views.length()];
-      for ( int i = 0 ; i < views.length(); i++) {
-        fViews[i] =
-            new ScapSyncCweRelationshipViewRest(views.getJSONObject(i));
-      }
+
+      fViews = ScapSyncUtils.getObjectArray(scapSyncCweRelationshipRest.getJSONArray(VIEWS), ScapSyncCweRelationshipViewRest.class);
     } catch (JSONException e) {
       e.printStackTrace();
     }

@@ -6,7 +6,6 @@ package be.boeboe.scapsync.rest.cve;
 import java.util.Arrays;
 import java.util.Date;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,13 +59,7 @@ public class ScapSyncCveDetailsRest implements IScapSyncCveDetails {
       fUpstreamPublished = ScapSyncUtils.getDate(scapSyncCveDetailsRest.getString(UPSTREAM_PUBLISHED));
       fSummary = scapSyncCveDetailsRest.getString(SUMMARY);
       fVersionUrl = scapSyncCveDetailsRest.getString(VERSION_URL);
-      
-      JSONArray references = scapSyncCveDetailsRest.getJSONArray(REFERENCES);
-      fReferences = new IScapSyncCveReference[references.length()];
-      for ( int i = 0 ; i < references.length(); i++) {
-        fReferences[i] =
-            new ScapSyncCveReferenceRest(references.getJSONObject(i));
-      }
+      fReferences = ScapSyncUtils.getObjectArray(scapSyncCveDetailsRest.getJSONArray(REFERENCES), ScapSyncCveReferenceRest.class);
     } catch (JSONException e) {
       e.printStackTrace();
     }

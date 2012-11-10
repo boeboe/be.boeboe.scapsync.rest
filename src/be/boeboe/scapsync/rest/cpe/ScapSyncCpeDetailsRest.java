@@ -3,7 +3,6 @@ package be.boeboe.scapsync.rest.cpe;
 import java.util.Arrays;
 import java.util.Date;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,15 +40,10 @@ public class ScapSyncCpeDetailsRest implements IScapSyncCpeDetails {
       fStatus = scapSyncCpeDetailsRest.getString(STATUS);
       fName = scapSyncCpeDetailsRest.getString(NAME);
       fVersionCount = scapSyncCpeDetailsRest.getString(VERSION_COUNT);
-      fUpstreamModified = ScapSyncUtils.getDate(
-          scapSyncCpeDetailsRest.getString(UPSTREAM_MODIFIED));
+      fUpstreamModified = ScapSyncUtils.getDate(scapSyncCpeDetailsRest.getString(UPSTREAM_MODIFIED));
       fVersionUrl = scapSyncCpeDetailsRest.getString(VERSION_URL);
-      
-      JSONArray titles = scapSyncCpeDetailsRest.getJSONArray(TITLES);
-      fTitles = new String[titles.length()];
-      for (int i = 0; i < titles.length() ; i++) {
-        fTitles[i] = titles.getString(i);        
-      }
+
+      fTitles = ScapSyncUtils.getStringArray(scapSyncCpeDetailsRest.getJSONArray(TITLES));
     } catch (JSONException e) {
       e.printStackTrace();
     }
