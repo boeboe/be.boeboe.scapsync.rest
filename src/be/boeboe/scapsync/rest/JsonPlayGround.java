@@ -13,23 +13,33 @@ public class JsonPlayGround {
     ScapSyncSearcher searcher = new ScapSyncSearcher();
     //String[] targetArray = { "openssl", "http", "nginx", "outlook" };
     //String[] targetArray = { "windows", "android", "iphone", "explorer" };
-    String[] targetArray = { "ftp", "linux", "sip", "firewall" };
+    //String[] targetArray = { "ftp", "linux", "sip", "firewall" };
+    //String[] targetArray = { "apple", "cwmp", "dhcp", "dns" };
+    String[] targetArray = { "cisco", "openwrt", "huawei", "sagem" };
     
     for (String target : targetArray) {
-      for (IScapSyncSearchResult r : searcher.searchAll("openssl")) {
-        if (r.getType().equals(IScapSyncSearchResultType.TYPE_CPE)) {
-          System.out.println("\n=== CPE ===[ " + target + " ]=== CPE ===");
-          System.out.println("RES: " + r.toString());
-          // System.out.println("DETAILS: " + searcher.getCpeDetails(r).toString());
-        } else if (r.getType().equals(IScapSyncSearchResultType.TYPE_CVE)) {
-          System.out.println("\n=== CVE ===[ " + target + " ]=== CVE ===");
-          System.out.println("RES: " + r.toString());
-          System.out.println("DETAILS: " + searcher.getCveDetails(r).toString());
-        } else if (r.getType().equals(IScapSyncSearchResultType.TYPE_CWE)) {
-          System.out.println("\n=== CWE ===[ " + target + " ]=== CWE ===");
-          System.out.println("RES: " + r.toString());
-          System.out.println("DETAILS: " + searcher.getCweDetails(r).toString());
-        }
+      searchTarget(searcher, target);
+    }
+  }
+
+  /**
+   * @param searcher
+   * @param target
+   */
+  private static void searchTarget(ScapSyncSearcher searcher, String target) {
+    for (IScapSyncSearchResult r : searcher.searchAll(target)) {
+      if (r.getType().equals(IScapSyncSearchResultType.TYPE_CPE)) {
+        System.out.println("\n=== CPE ===[ " + target + " ]=== CPE ===");
+        System.out.println("RES: " + r.toString());
+        // System.out.println("DETAILS: " + searcher.getCpeDetails(r).toString());
+      } else if (r.getType().equals(IScapSyncSearchResultType.TYPE_CVE)) {
+        System.out.println("\n=== CVE ===[ " + target + " ]=== CVE ===");
+        System.out.println("RES: " + r.toString());
+        System.out.println("DETAILS: " + searcher.getCveDetails(r).toString());
+      } else if (r.getType().equals(IScapSyncSearchResultType.TYPE_CWE)) {
+        System.out.println("\n=== CWE ===[ " + target + " ]=== CWE ===");
+        System.out.println("RES: " + r.toString());
+        System.out.println("DETAILS: " + searcher.getCweDetails(r).toString());
       }
     }
   }
