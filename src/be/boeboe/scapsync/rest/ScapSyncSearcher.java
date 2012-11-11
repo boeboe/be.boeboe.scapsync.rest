@@ -16,9 +16,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import be.boeboe.scapsync.rest.cce.ScapSyncCceDetailsRest;
 import be.boeboe.scapsync.rest.cpe.ScapSyncCpeDetailsRest;
 import be.boeboe.scapsync.rest.cve.ScapSyncCveDetailsRest;
 import be.boeboe.scapsync.rest.cwe.ScapSyncCweDetailsRest;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncCceDetails;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCpeDetails;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCveDetails;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails;
@@ -101,6 +103,20 @@ public class ScapSyncSearcher implements IScapSyncSearcher {
     return recursiveScapSyncSearchResult(fQueryCweBaseUri, searchItem);
   }
 
+
+  /**
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#searchCce(java.lang.String)
+   */
+  public IScapSyncCceDetails getCceDetails(IScapSyncSearchResult searchResult) {
+    if (searchResult.getType() != IScapSyncSearchResultType.TYPE_CCE) {
+      return null;
+    } else {
+      URI detailsUri = URI.create(SCAP_SYNC_BASE_URL + searchResult.getUrl());
+      JSONObject jsonDetailsResult = execRestGet(detailsUri);
+      return new ScapSyncCceDetailsRest(jsonDetailsResult);
+    }
+  }
+  
   /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#getCpeDetails(
    *          be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult)

@@ -30,7 +30,7 @@ public class ScapSyncCweConsequenceRest implements IScapSyncCweConsequence {
     try {
       fImpact = scapSyncCweConsequenceRest.getString(IMPACT);
       fScope = scapSyncCweConsequenceRest.getString(SCOPE);
-      fNotes = scapSyncCweConsequenceRest.getString(NOTES);
+      fNotes = scapSyncCweConsequenceRest.has(NOTES) ? scapSyncCweConsequenceRest.getString(NOTES): null;
     } catch (JSONException e) {
       e.printStackTrace();
     }

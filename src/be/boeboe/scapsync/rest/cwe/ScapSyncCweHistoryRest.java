@@ -31,8 +31,8 @@ public class ScapSyncCweHistoryRest implements IScapSyncCweHistory {
     super();
     try {
       fDate = ScapSyncUtils.getDate(scapSyncCweHistoryRest.getString(DATE));
-      fOrganization = scapSyncCweHistoryRest.getString(ORGANIZATION);
-      fModifier = scapSyncCweHistoryRest.getString(MODIFIER);
+      fOrganization = scapSyncCweHistoryRest.has(ORGANIZATION) ?scapSyncCweHistoryRest.getString(ORGANIZATION): null;
+      fModifier = scapSyncCweHistoryRest.has(MODIFIER) ? scapSyncCweHistoryRest.getString(MODIFIER): null;
       fComment = scapSyncCweHistoryRest.getString(COMMENT);
     } catch (JSONException e) {
       e.printStackTrace();

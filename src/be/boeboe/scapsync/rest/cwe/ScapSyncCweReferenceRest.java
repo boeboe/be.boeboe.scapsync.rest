@@ -51,13 +51,13 @@ public class ScapSyncCweReferenceRest implements IScapSyncCweReference {
     super();
     try { 
       fUrl = scapSyncCweReferenceRest.has(URL) ? URI.create(scapSyncCweReferenceRest.getString(URL)): null;
-      fTitle = scapSyncCweReferenceRest.getString(TITLE);
+      fTitle = scapSyncCweReferenceRest.has(TITLE) ? scapSyncCweReferenceRest.getString(TITLE): null;
       fEdition = scapSyncCweReferenceRest.has(EDITION) ? scapSyncCweReferenceRest.getString(EDITION): null;
       fSection = scapSyncCweReferenceRest.has(SECTION) ? scapSyncCweReferenceRest.getString(SECTION): null;
       fDate = scapSyncCweReferenceRest.has(DATE) ? ScapSyncUtils.getDate(scapSyncCweReferenceRest.getString(DATE)): null;
       fPublicationDate = scapSyncCweReferenceRest.has(PUBLICATION_DATE) ? ScapSyncUtils.getDate(scapSyncCweReferenceRest.getString(PUBLICATION_DATE)): null;
       
-      fAutors = ScapSyncUtils.getStringArray(scapSyncCweReferenceRest.getJSONArray(AUTOR));
+      fAutors = scapSyncCweReferenceRest.has(AUTOR) ? ScapSyncUtils.getStringArray(scapSyncCweReferenceRest.getJSONArray(AUTOR)): null;
     } catch (JSONException e) {
       e.printStackTrace();
     }

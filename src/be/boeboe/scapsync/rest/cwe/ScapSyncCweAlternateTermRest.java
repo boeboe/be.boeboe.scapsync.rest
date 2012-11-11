@@ -26,7 +26,7 @@ public class ScapSyncCweAlternateTermRest implements IScapSyncCweAlternateTerm {
     super();
     try {
       fName = scapSyncCweAlternateTermRest.getString(NAME);
-      fDescription = scapSyncCweAlternateTermRest.getString(DESCRIPTION);
+      fDescription = scapSyncCweAlternateTermRest.has(DESCRIPTION) ? scapSyncCweAlternateTermRest.getString(DESCRIPTION): null;
     } catch (JSONException e) {
       e.printStackTrace();
     }
