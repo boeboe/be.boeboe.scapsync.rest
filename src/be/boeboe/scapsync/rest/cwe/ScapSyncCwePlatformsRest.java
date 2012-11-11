@@ -27,7 +27,7 @@ public class ScapSyncCwePlatformsRest implements IScapSyncCwePlatforms {
   public ScapSyncCwePlatformsRest(JSONObject scapSyncCwePlatformsRest) {
     super();
     try {
-      fNotes = scapSyncCwePlatformsRest.getString(NOTES);
+      fNotes = scapSyncCwePlatformsRest.has(NOTES) ? scapSyncCwePlatformsRest.getString(NOTES): null;
       
       fLanguages = ScapSyncUtils.getStringArray(scapSyncCwePlatformsRest.getJSONArray(LANGUAGES));
     } catch (JSONException e) {

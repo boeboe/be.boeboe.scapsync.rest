@@ -50,12 +50,12 @@ public class ScapSyncCweReferenceRest implements IScapSyncCweReference {
   public ScapSyncCweReferenceRest(JSONObject scapSyncCweReferenceRest) {
     super();
     try { 
-      fUrl = URI.create(scapSyncCweReferenceRest.getString(URL));
+      fUrl = scapSyncCweReferenceRest.has(URL) ? URI.create(scapSyncCweReferenceRest.getString(URL)): null;
       fTitle = scapSyncCweReferenceRest.getString(TITLE);
-      fEdition = scapSyncCweReferenceRest.getString(EDITION);
-      fSection = scapSyncCweReferenceRest.getString(SECTION);
-      fDate = ScapSyncUtils.getDate(scapSyncCweReferenceRest.getString(DATE));
-      fPublicationDate = ScapSyncUtils.getDate(scapSyncCweReferenceRest.getString(PUBLICATION_DATE));
+      fEdition = scapSyncCweReferenceRest.has(EDITION) ? scapSyncCweReferenceRest.getString(EDITION): null;
+      fSection = scapSyncCweReferenceRest.has(SECTION) ? scapSyncCweReferenceRest.getString(SECTION): null;
+      fDate = scapSyncCweReferenceRest.has(DATE) ? ScapSyncUtils.getDate(scapSyncCweReferenceRest.getString(DATE)): null;
+      fPublicationDate = scapSyncCweReferenceRest.has(PUBLICATION_DATE) ? ScapSyncUtils.getDate(scapSyncCweReferenceRest.getString(PUBLICATION_DATE)): null;
       
       fAutors = ScapSyncUtils.getStringArray(scapSyncCweReferenceRest.getJSONArray(AUTOR));
     } catch (JSONException e) {

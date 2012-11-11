@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import be.boeboe.scapsync.rest.ScapSyncUtils;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncCweRelationship;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncCweRelationshipView;
 
 /**
  * Rest Implementation of a ScapSync CWE Relationship
@@ -40,7 +41,7 @@ public class ScapSyncCweRelationshipRest implements IScapSyncCweRelationship {
       fTargetId = scapSyncCweRelationshipRest.getString(TARGET_ID);
       fNature = scapSyncCweRelationshipRest.getString(NATURE);
 
-      fViews = ScapSyncUtils.getObjectArray(scapSyncCweRelationshipRest.getJSONArray(VIEWS), ScapSyncCweRelationshipViewRest.class);
+      fViews = scapSyncCweRelationshipRest.has(VIEWS) ? ScapSyncUtils.getObjectArray(scapSyncCweRelationshipRest.getJSONArray(VIEWS), ScapSyncCweRelationshipViewRest.class): null;
     } catch (JSONException e) {
       e.printStackTrace();
     }
@@ -84,44 +85,5 @@ public class ScapSyncCweRelationshipRest implements IScapSyncCweRelationship {
   @Override
   public IScapSyncCweRelationshipView[] getViews() {
     return fViews;
-  }
-  
-  /**
-   * Rest Implementation of a ScapSync CWE Relationship View
-   * 
-   * @author boeboe
-   */
-  public class ScapSyncCweRelationshipViewRest implements IScapSyncCweRelationshipView {
-    private static final String URL = "url";
-    private static final String ID = "id";
-
-    private String fUrl;
-    private String fId;
-    
-    public ScapSyncCweRelationshipViewRest(JSONObject scapSyncCweRelationshipRest) {
-      super();
-      try {
-        fUrl = scapSyncCweRelationshipRest.getString(URL);
-        fId = scapSyncCweRelationshipRest.getString(ID);
-      } catch (JSONException e) {
-        e.printStackTrace();
-      }
-    }
-    
-    /**
-     * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweRelationship.IScapSyncCweRelationshipView#getUrl()
-     */
-    @Override
-    public String getUrl() {
-      return fUrl;
-    }
-
-    /**
-     * @see be.boeboe.scapsync.rest.interfaces.IScapSyncCweRelationship.IScapSyncCweRelationshipView#getId()
-     */
-    @Override
-    public String getId() {
-      return fId;
-    }
   }
 }

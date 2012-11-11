@@ -51,9 +51,9 @@ public class ScapSyncCveDetailsRest implements IScapSyncCveDetails {
   public ScapSyncCveDetailsRest(JSONObject scapSyncCveDetailsRest) {
     super();
     try {
-      fCvss = new ScapSyncCveCvssRest(scapSyncCveDetailsRest.getJSONObject(CVSS));
-      fCvssVector = scapSyncCveDetailsRest.getString(CVSS_VECTOR);
-      fCvssBaseScore = scapSyncCveDetailsRest.getDouble(CVSS_BASE_SCORE);
+      fCvss = scapSyncCveDetailsRest.has(CVSS) ? new ScapSyncCveCvssRest(scapSyncCveDetailsRest.getJSONObject(CVSS)) : null;
+      fCvssVector = scapSyncCveDetailsRest.has(CVSS_VECTOR) ? scapSyncCveDetailsRest.getString(CVSS_VECTOR): null;
+      fCvssBaseScore = scapSyncCveDetailsRest.has(CVSS_BASE_SCORE) ? scapSyncCveDetailsRest.getDouble(CVSS_BASE_SCORE): 0;
       fVersionCount = scapSyncCveDetailsRest.getInt(VERSION_COUNT);
       fUpstreamModified = ScapSyncUtils.getDate(scapSyncCveDetailsRest.getString(UPSTREAM_MODIFIED));
       fUpstreamPublished = ScapSyncUtils.getDate(scapSyncCveDetailsRest.getString(UPSTREAM_PUBLISHED));

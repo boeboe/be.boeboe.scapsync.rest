@@ -31,8 +31,8 @@ public class ScapSyncCweDetectionMethodRest implements IScapSyncCweDetectionMeth
   public ScapSyncCweDetectionMethodRest(JSONObject scapSyncCweDetectionMethodRest) {
     super();
     try {
-      fNotes = scapSyncCweDetectionMethodRest.getString(NOTES);
-      fEffectiveness = scapSyncCweDetectionMethodRest.getString(EFFECTIVENESS);
+      fNotes = scapSyncCweDetectionMethodRest.has(NOTES) ? scapSyncCweDetectionMethodRest.getString(NOTES): null;
+      fEffectiveness = scapSyncCweDetectionMethodRest.has(EFFECTIVENESS) ? scapSyncCweDetectionMethodRest.getString(EFFECTIVENESS): null;
       fName = scapSyncCweDetectionMethodRest.getString(NAME);
       fDescription = scapSyncCweDetectionMethodRest.getString(DESCRIPTION);
     } catch (JSONException e) {

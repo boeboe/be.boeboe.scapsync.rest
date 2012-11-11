@@ -11,6 +11,12 @@ package be.boeboe.scapsync.rest.interfaces;
 public interface IScapSyncSearcher {
   
   /**
+   * Close down the searcher (release HttpClient handle).
+   */
+  public void close();
+  
+  
+  /**
    * Search for CCE's (Common Configuration Enumeration) or misconfigurations.
    * CCE provides unique identifiers to system configuration issues in order
    * to facilitate fast and accurate correlation of configuration data across

@@ -34,8 +34,8 @@ public class ScapSyncCweTaxonomyRest implements IScapSyncCweTaxonomy {
     try {
       fTaxonomy = scapSyncCweTaxonomyRest.getString(TAXONOMY);
       fName = scapSyncCweTaxonomyRest.getString(NAME);
-      fFit = scapSyncCweTaxonomyRest.getString(FIT);
-      fId = scapSyncCweTaxonomyRest.getString(ID);
+      fFit = scapSyncCweTaxonomyRest.has(FIT) ? scapSyncCweTaxonomyRest.getString(FIT): null;
+      fId = scapSyncCweTaxonomyRest.has(ID) ? scapSyncCweTaxonomyRest.getString(ID): null;
     } catch (JSONException e) {
       e.printStackTrace();
     }

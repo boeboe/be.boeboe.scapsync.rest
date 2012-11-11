@@ -96,28 +96,28 @@ public class ScapSyncCweDetailsRest implements IScapSyncCweDetails {
       fUpstreamModified = ScapSyncUtils.getDate(scapSyncCweDetailsRest.getString(UPSTREAM_MODIFIED));
       fCweId = scapSyncCweDetailsRest.getString(CWE_ID);
       fCweType = scapSyncCweDetailsRest.getString(CWE_TYPE);
-      fDescription = scapSyncCweDetailsRest.getString(DESCRIPTION);
+      fDescription = scapSyncCweDetailsRest.has(DESCRIPTION) ? scapSyncCweDetailsRest.getString(DESCRIPTION) : null; 
       fVersionCount = scapSyncCweDetailsRest.getInt(VERSION_COUNT);
       fSummary = scapSyncCweDetailsRest.getString(SUMMARY);
       fVersionUrl = scapSyncCweDetailsRest.getString(VERSION_URL);
-      fLikelihoodOfExploit = scapSyncCweDetailsRest.getString(LIKELIHOOD_OF_EXPLOIT);
+      fLikelihoodOfExploit = scapSyncCweDetailsRest.has(LIKELIHOOD_OF_EXPLOIT) ? scapSyncCweDetailsRest.getString(LIKELIHOOD_OF_EXPLOIT) : null;
 
-      fObservedExamples = ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(OBSERVED_EXAMPLES), ScapSyncCweObservedExampleRest.class);
-      fDetectionMethods = ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(DETECTION_METHODS), ScapSyncCweDetectionMethodRest.class);
-      fAttackPatterns = ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(ATTACK_PATTERNS), ScapSyncCweAttackPatternRest.class);
-      fMitigations = ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(MITIGATIONS), ScapSyncCweMitigationRest.class);
-      fReferences = ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(REFERENCES), ScapSyncCweReferenceRest.class);
-      fTaxonomyMappings = ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(TAXONOMY_MAPPINGS), ScapSyncCweTaxonomyRest.class);
-      fConsequences = ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(CONSEQUENCES), ScapSyncCweConsequenceRest.class);
-      fHistrories = ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(HISTORY), ScapSyncCweHistoryRest.class);
-      fRelationships = ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(RELATIONSHIPS), ScapSyncCweRelationshipRest.class);
-      fAlternateTerms = ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(ALTERNATE_TERMS), ScapSyncCweAlternateTermRest.class);
-      fDemonstrativeExamples = ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(DEMONSTRATIVE_EXAMPLES), ScapSyncCweDemonstrativeExampleRest.class);
+      fObservedExamples = scapSyncCweDetailsRest.has(OBSERVED_EXAMPLES) ? ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(OBSERVED_EXAMPLES), ScapSyncCweObservedExampleRest.class): null;
+      fDetectionMethods = scapSyncCweDetailsRest.has(DETECTION_METHODS) ? ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(DETECTION_METHODS), ScapSyncCweDetectionMethodRest.class): null;
+      fAttackPatterns = scapSyncCweDetailsRest.has(ATTACK_PATTERNS) ? ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(ATTACK_PATTERNS), ScapSyncCweAttackPatternRest.class): null;
+      fMitigations = scapSyncCweDetailsRest.has(MITIGATIONS) ? ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(MITIGATIONS), ScapSyncCweMitigationRest.class): null;
+      fReferences = scapSyncCweDetailsRest.has(REFERENCES) ? ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(REFERENCES), ScapSyncCweReferenceRest.class): null;
+      fTaxonomyMappings = scapSyncCweDetailsRest.has(TAXONOMY_MAPPINGS) ? ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(TAXONOMY_MAPPINGS), ScapSyncCweTaxonomyRest.class): null;
+      fConsequences = scapSyncCweDetailsRest.has(CONSEQUENCES) ? ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(CONSEQUENCES), ScapSyncCweConsequenceRest.class): null;
+      fHistrories = scapSyncCweDetailsRest.has(HISTORY) ? ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(HISTORY), ScapSyncCweHistoryRest.class): null;
+      fRelationships = scapSyncCweDetailsRest.has(RELATIONSHIPS) ? ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(RELATIONSHIPS), ScapSyncCweRelationshipRest.class): null;
+      fAlternateTerms = scapSyncCweDetailsRest.has(ALTERNATE_TERMS) ? ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(ALTERNATE_TERMS), ScapSyncCweAlternateTermRest.class): null;
+      fDemonstrativeExamples = scapSyncCweDetailsRest.has(DEMONSTRATIVE_EXAMPLES) ? ScapSyncUtils.getObjectArray(scapSyncCweDetailsRest.getJSONArray(DEMONSTRATIVE_EXAMPLES), ScapSyncCweDemonstrativeExampleRest.class): null;
 
-      fAffectedResources = ScapSyncUtils.getStringArray(scapSyncCweDetailsRest.getJSONArray(AFFECTED_RESOURCES));
-      fTimesOfIntroduction = ScapSyncUtils.getStringArray(scapSyncCweDetailsRest.getJSONArray(TIME_OF_INTRODUCTION));
+      fAffectedResources = scapSyncCweDetailsRest.has(AFFECTED_RESOURCES) ? ScapSyncUtils.getStringArray(scapSyncCweDetailsRest.getJSONArray(AFFECTED_RESOURCES)): null;
+      fTimesOfIntroduction = scapSyncCweDetailsRest.has(TIME_OF_INTRODUCTION) ? ScapSyncUtils.getStringArray(scapSyncCweDetailsRest.getJSONArray(TIME_OF_INTRODUCTION)): null;
 
-      fPlatforms = new ScapSyncCwePlatformsRest(scapSyncCweDetailsRest.getJSONObject(PLATFORMS));
+      fPlatforms = scapSyncCweDetailsRest.has(PLATFORMS) ? new ScapSyncCwePlatformsRest(scapSyncCweDetailsRest.getJSONObject(PLATFORMS)): null;
     } catch (JSONException e) {
       e.printStackTrace();
     }

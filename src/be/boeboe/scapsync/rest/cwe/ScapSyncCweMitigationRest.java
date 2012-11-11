@@ -35,11 +35,11 @@ public class ScapSyncCweMitigationRest implements IScapSyncCweMitigation {
   public ScapSyncCweMitigationRest(JSONObject scapSyncCweMitigationRest) {
     super();
     try {
-      fPhase = scapSyncCweMitigationRest.getString(PHASE);
-      fEffectiveness = scapSyncCweMitigationRest.getString(EFFECTIVENESS);
-      fNotes = scapSyncCweMitigationRest.getString(NOTES);
+      fPhase = scapSyncCweMitigationRest.has(PHASE) ? scapSyncCweMitigationRest.getString(PHASE): null;
+      fEffectiveness = scapSyncCweMitigationRest.has(EFFECTIVENESS) ? scapSyncCweMitigationRest.getString(EFFECTIVENESS): null;
+      fNotes = scapSyncCweMitigationRest.has(NOTES) ? scapSyncCweMitigationRest.getString(NOTES): null;
       fDescription = scapSyncCweMitigationRest.getString(DESCRIPTION);
-      fStrategy = scapSyncCweMitigationRest.getString(STRATEGY);
+      fStrategy = scapSyncCweMitigationRest.has(STRATEGY) ? scapSyncCweMitigationRest.getString(STRATEGY): null;
     } catch (JSONException e) {
       e.printStackTrace();
     }

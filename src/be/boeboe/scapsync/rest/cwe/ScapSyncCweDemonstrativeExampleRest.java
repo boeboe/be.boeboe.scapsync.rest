@@ -26,7 +26,7 @@ public class ScapSyncCweDemonstrativeExampleRest implements IScapSyncCweDemonstr
   public ScapSyncCweDemonstrativeExampleRest(JSONObject scapSyncCweDemonstrativeExampleRest) {
     super();
     try {
-      fBody = scapSyncCweDemonstrativeExampleRest.getString(BODY);
+      fBody = scapSyncCweDemonstrativeExampleRest.has(BODY) ?  scapSyncCweDemonstrativeExampleRest.getString(BODY): null;
       fIntro = scapSyncCweDemonstrativeExampleRest.getString(INTRO);
     } catch (JSONException e) {
       e.printStackTrace();

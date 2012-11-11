@@ -191,4 +191,12 @@ public class ScapSyncSearcher implements IScapSyncSearcher {
     
     return resultList.toArray(new IScapSyncSearchResult[resultList.size()]);
   }
+
+  /**
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#close()
+   */
+  @Override
+  public void close() {
+    fHttpClient.getConnectionManager().shutdown();
+  }
 }
