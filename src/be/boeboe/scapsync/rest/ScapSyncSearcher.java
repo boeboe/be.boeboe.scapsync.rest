@@ -8,6 +8,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -28,7 +29,9 @@ import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchPage;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResultType;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncStats;
 import be.boeboe.scapsync.rest.search.ScapSyncSearchRest;
+import be.boeboe.scapsync.rest.stats.ScapSyncStatsRest;
 
 /**
  * Rest Implementation of a ScapSyncSearcher.
@@ -37,6 +40,7 @@ import be.boeboe.scapsync.rest.search.ScapSyncSearchRest;
 public class ScapSyncSearcher implements IScapSyncSearcher {
   private static final URI SCAP_SYNC_BASE_URL = URI.create("http://scapsync.com");
   private static final String SEARCH_PATTERN = "search_url";
+  private static final String STATS_PATTERN = "stats_url";
   
   private final DefaultHttpClient fHttpClient;
   private URI fSearchBaseUri;
@@ -45,6 +49,7 @@ public class ScapSyncSearcher implements IScapSyncSearcher {
   private URI fQueryCpeBaseUri;
   private URI fQueryCveBaseUri;
   private URI fQueryCweBaseUri;
+  private URI fStatsUri;
 
   public ScapSyncSearcher() {
     fHttpClient = new DefaultHttpClient();
@@ -59,6 +64,7 @@ public class ScapSyncSearcher implements IScapSyncSearcher {
       fQueryCveBaseUri = URI.create(fSearchBaseUri + "?solrDocumentType=cve&q=");
       fQueryCweBaseUri = URI.create(fSearchBaseUri + "?solrDocumentType=cwe&q=");
 
+      fStatsUri = URI.create(jsonMain.getString(STATS_PATTERN));
     } catch (JSONException e) {
       throw new RuntimeException("Problem fetching base url patterns", e);
     }
@@ -214,5 +220,14 @@ public class ScapSyncSearcher implements IScapSyncSearcher {
   @Override
   public void close() {
     fHttpClient.getConnectionManager().shutdown();
+  }
+
+  /**
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#getStatistics()
+   */
+  @Override
+  public Map<String, Integer> getStatistics() {
+    IScapSyncStats stats = new ScapSyncStatsRest(execRestGet(fStatsUri));
+    return stats.getStatistics();
   }
 }

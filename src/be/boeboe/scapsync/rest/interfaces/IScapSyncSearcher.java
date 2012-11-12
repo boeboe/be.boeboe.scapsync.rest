@@ -3,6 +3,8 @@
  */
 package be.boeboe.scapsync.rest.interfaces;
 
+import java.util.Map;
+
 /**
  * Interface that represents a ScapSyncSearcher.
  * @author boeboe
@@ -96,4 +98,11 @@ public interface IScapSyncSearcher {
    * @return IScapSyncCweDetails the full details of this CWE
    */
   public IScapSyncCweDetails getCweDetails(IScapSyncSearchResult searchResult);
+  
+  /**
+   * Get full statistics of the available SCAP data.
+   * @param searchResult the search result containing generic CWE data
+   * @return IScapSyncCweDetails the full details of this CWE
+   */
+  public Map<String, Integer> getStatistics();
 }
