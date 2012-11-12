@@ -74,12 +74,7 @@ public class ScapSyncStatsRest implements IScapSyncStats {
           fWeaknesses = row.getJSONObject(1).getInt(VALUE);
         } 
       }
-      
-      fConfigurations = scapSyncStatsRest.getInt(CONFIGURATIONS);
-      fProducts = scapSyncStatsRest.getInt(PRODUCTS);
-      fVulnerabilities = scapSyncStatsRest.getInt(VULNERABILITIES);
-      fWeaknesses = scapSyncStatsRest.getInt(WEAKNESSES);
-      
+
       fStatistics.put(CONFIGURATIONS, fConfigurations);
       fStatistics.put(PRODUCTS, fProducts);
       fStatistics.put(VULNERABILITIES, fVulnerabilities);

@@ -11,15 +11,17 @@ public class JsonPlayGround {
   public static void main(String[] args) {
 
     ScapSyncSearcher searcher = new ScapSyncSearcher();
-    String[] targetArray = { "explorer"
-//                             "openssl", "http", "nginx", "outlook",
-//                             "windows", "android", "iphone", "explorer",
-//                             "ftp", "linux", "sip", "firewall",
-//                             "apple", "cwmp", "dhcp", "dns" ,
-//                             "cisco", "openwrt", "huawei", "sagem",
-//                             "unix", "uhttpd", "torrent", "microsoft",
-//                             "sql", "mysql", "oracle", "vpn", 
-//                             "root", "guest", "admin", "overflow"
+    System.out.println(searcher.getStatistics());
+    
+    String[] targetArray = { "explorer",
+                             "openssl", "http", "nginx", "outlook",
+                             "windows", "android", "iphone", "explorer",
+                             "ftp", "linux", "sip", "firewall",
+                             "apple", "cwmp", "dhcp", "dns" ,
+                             "cisco", "openwrt", "huawei", "sagem",
+                             "unix", "uhttpd", "torrent", "microsoft",
+                             "sql", "mysql", "oracle", "vpn", 
+                             "root", "guest", "admin", "overflow"
     };
     
     for (String target : targetArray) {
