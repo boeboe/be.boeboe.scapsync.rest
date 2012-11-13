@@ -13,8 +13,7 @@ public class JsonPlayGround {
     ScapSyncSearcher searcher = new ScapSyncSearcher();
     System.out.println(searcher.getStatistics());
     
-    String[] targetArray = { "explorer",
-                             "openssl", "http", "nginx", "outlook",
+    String[] targetArray = { "openssl", "http", "nginx", "outlook",
                              "windows", "android", "iphone", "explorer",
                              "ftp", "linux", "sip", "firewall",
                              "apple", "cwmp", "dhcp", "dns" ,
@@ -35,6 +34,7 @@ public class JsonPlayGround {
    */
   private static void searchTarget(ScapSyncSearcher searcher, String target) {
     for (IScapSyncSearchResult r : searcher.searchAll(target)) {
+      System.out.println(r.toString());
       if (r.getType().equals(IScapSyncSearchResultType.TYPE_CPE)) {
         System.out.println("\n=== CPE ===[ " + target + " ]=== CPE ===");
         System.out.println("RES: " + r.toString());
@@ -47,6 +47,14 @@ public class JsonPlayGround {
         System.out.println("\n=== CWE ===[ " + target + " ]=== CWE ===");
         System.out.println("RES: " + r.toString());
         //System.out.println("DETAILS: " + searcher.getCweDetails(r).toString());
+      } else if (r.getType().equals(IScapSyncSearchResultType.TYPE_CCE)) {
+        System.out.println("\n=== CCE ===[ " + target + " ]=== CCE ===");
+        System.out.println("RES: " + r.toString());
+        //System.out.println("DETAILS: " + searcher.getCweDetails(r).toString());
+      } else if (r.getType().equals(IScapSyncSearchResultType.TYPE_CCE_RESOURCE)) {
+        System.out.println("\n=== CCE_RESOURCE ===[ " + target + " ]=== CCE_RESOURCE ===");
+        System.out.println("RES: " + r.toString());
+        //System.out.println("DETAILS: " + searcher.getCceDetails(r).toString());
       }
     }
   }

@@ -74,7 +74,7 @@ public class ScapSyncSearcher implements IScapSyncSearcher {
     return fSearchBaseUri.toString();
   }
 
-  /** (non-Javadoc)
+  /**
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncSearcher#searchAll(java.lang.String)
    */
   public IScapSyncSearchResult[] searchAll(String searchItem) {
