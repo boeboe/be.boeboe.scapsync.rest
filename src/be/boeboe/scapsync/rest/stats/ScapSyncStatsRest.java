@@ -43,15 +43,7 @@ public class ScapSyncStatsRest implements IScapSyncStats {
   private static final String ROWS = "rows";
   private static final String COUNT = "c";
   private static final String VALUE = "v";
-  private static final String CONFIGURATIONS = "Configurations";
-  private static final String PRODUCTS = "Products";
-  private static final String VULNERABILITIES = "Vulnerabilities";
-  private static final String WEAKNESSES = "Weaknesses";
 
-  private int fConfigurations = 0;
-  private int fProducts = 0;
-  private int fVulnerabilities = 0;
-  private int fWeaknesses = 0;
   Map<String,Integer> fStatistics = new HashMap<String,Integer>();
   
 
@@ -63,57 +55,11 @@ public class ScapSyncStatsRest implements IScapSyncStats {
       for (int i = 0 ; i < rows.length(); i++) {
         JSONArray row = rows.getJSONObject(i).getJSONArray(COUNT);
         String scope = row.getJSONObject(0).getString(VALUE);
-        
-        if (scope.equals(CONFIGURATIONS)) {
-          fConfigurations = row.getJSONObject(1).getInt(VALUE);
-        } else if (scope.equals(PRODUCTS)) {
-          fProducts = row.getJSONObject(1).getInt(VALUE);
-        } else if (scope.equals(VULNERABILITIES)) {
-          fVulnerabilities = row.getJSONObject(1).getInt(VALUE);
-        } else if (scope.equals(WEAKNESSES)) {
-          fWeaknesses = row.getJSONObject(1).getInt(VALUE);
-        } 
+        fStatistics.put(scope, row.getJSONObject(1).getInt(VALUE));
       }
-
-      fStatistics.put(CONFIGURATIONS, fConfigurations);
-      fStatistics.put(PRODUCTS, fProducts);
-      fStatistics.put(VULNERABILITIES, fVulnerabilities);
-      fStatistics.put(WEAKNESSES, fWeaknesses);
     } catch (JSONException e) {
       e.printStackTrace();
     }
-  }
-  
-  /**
-   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncStats#getAmountConfigurations()
-   */
-  @Override
-  public int getAmountConfigurations() {
-    return fConfigurations;
-  }
-
-  /**
-   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncStats#getAmountProducts()
-   */
-  @Override
-  public int getAmountProducts() {
-    return fProducts;
-  }
-
-  /**
-   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncStats#getAmountVulnerabilities()
-   */
-  @Override
-  public int getAmountVulnerabilities() {
-    return fVulnerabilities;
-  }
-
-  /**
-   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncStats#getAmountWeaknesses()
-   */
-  @Override
-  public int getAmountWeaknesses() {
-    return fWeaknesses;
   }
 
   /**
