@@ -26,8 +26,6 @@ public class ScapSyncSearch extends Thread {
     URI queryUri = URI.create(baseUri + searchItem + "&n=100");
     JSONObject jsonFirstResult = ScapSyncUtils.execRestGet( queryUri);
     fFirstResult = new ScapSyncSearchRest(jsonFirstResult);
-    System.out.println(fFirstResult.toString());
-    System.out.println("-----");
   }
   
   private void search(URI pageUri) {
