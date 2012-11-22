@@ -23,7 +23,7 @@ public class ScapSyncSearch extends Thread {
   
   
   public ScapSyncSearch(URI baseUri, String searchItem) {
-    URI queryUri = URI.create(baseUri + searchItem + "&n=100");
+    URI queryUri = URI.create(baseUri + "&q=" + searchItem + "&n=100");
     JSONObject jsonFirstResult = ScapSyncUtils.execRestGet( queryUri);
     fFirstResult = new ScapSyncSearchRest(jsonFirstResult);
   }
@@ -39,7 +39,7 @@ public class ScapSyncSearch extends Thread {
 
   public void run(){   
     for (IScapSyncSearchPage page : fFirstResult.getPages() ) {
-      URI pageUri = URI.create(ScapSyncSearcher.SCAP_SYNC_BASE_URL + page.getUrl());
+      URI pageUri = URI.create(ScapSyncHandle.SCAP_SYNC_BASE_URL + page.getUrl());
       search(pageUri);
     }
   }      

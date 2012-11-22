@@ -1,5 +1,7 @@
 package be.boeboe.scapsync.rest;
 
+import be.boeboe.scapsync.rest.interfaces.IScapSyncFeed;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchOrderFilter;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult;
 
 public class JsonPlayGround {
@@ -11,8 +13,17 @@ public class JsonPlayGround {
    */
   public static void main(String[] args) {
 
-    ScapSyncSearcher searcher = new ScapSyncSearcher();
-    //System.out.println(searcher.getStatistics());
+    ScapSyncHandle searcher = new ScapSyncHandle();
+    
+    for (IScapSyncFeed feed : searcher.getDailyFeed().getNewItems()) {
+      System.out.println("NEW: " + feed.toString());
+    }
+
+    for (IScapSyncFeed feed : searcher.getDailyFeed().getChangedItems()) {
+      System.out.println("OLD: " + feed.toString());
+    }
+    
+    System.out.println(searcher.getStatistics());
 
 //    String[] targetArray = { "openssl", "http", "nginx", "outlook",
 //                             "windows", "android", "iphone", "explorer",
@@ -27,7 +38,7 @@ public class JsonPlayGround {
 
     for (String target : targetArray) {
       
-      ScapSyncSearch search = searcher.searchAll(target);
+      ScapSyncSearch search = searcher.search(target, null, IScapSyncSearchOrderFilter.SORT_RELEVANT);
       
       ScapSyncSearchListener searchListener = new ScapSyncSearchListener() {
         @Override

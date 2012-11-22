@@ -14,9 +14,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,6 +94,10 @@ public class ScapSyncUtils {
   public static JSONObject execRestGet(URI uri) {
     final DefaultHttpClient httpClient;
     httpClient = new DefaultHttpClient();
+
+    HttpHost proxy = new HttpHost("127.0.0.1", 3128);
+    httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+
     HttpGet request = new HttpGet(uri);
     request.addHeader("Accept", "application/json");
 
@@ -101,17 +107,17 @@ public class ScapSyncUtils {
         throw new RuntimeException("Unexpected server response "
            + response.getStatusLine() + " for " + request.getRequestLine());
       }
-      
+
       InputStream inputStream = response.getEntity().getContent();
       InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
       BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
       StringBuilder stringBuilder = new StringBuilder();
-      
+
       String line;
       while ((line = bufferedReader.readLine()) != null) {
         stringBuilder.append(line);
       }
-      
+
       String output = stringBuilder.toString();
       JSONObject json = new JSONObject(output);
       httpClient.getConnectionManager().shutdown();
