@@ -1,8 +1,13 @@
 package be.boeboe.scapsync.rest;
 
+import be.boeboe.scapsync.rest.interfaces.IScapSyncCceDetails;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncCpeDetails;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncCveDetails;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncCweDetails;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncFeed;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchOrderFilter;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResultType;
 
 public class JsonPlayGround {
   
@@ -11,19 +16,22 @@ public class JsonPlayGround {
   /**
    * @param args
    */
+  /**
+   * @param args
+   */
   public static void main(String[] args) {
 
-    ScapSyncHandle searcher = new ScapSyncHandle();
+    final ScapSyncHandle scapSyncHandle = new ScapSyncHandle();
     
-    for (IScapSyncFeed feed : searcher.getDailyFeed().getNewItems()) {
+    for (IScapSyncFeed feed : scapSyncHandle.getDailyFeed().getNewItems()) {
       System.out.println("NEW: " + feed.toString());
     }
 
-    for (IScapSyncFeed feed : searcher.getDailyFeed().getChangedItems()) {
+    for (IScapSyncFeed feed : scapSyncHandle.getDailyFeed().getChangedItems()) {
       System.out.println("OLD: " + feed.toString());
     }
     
-    System.out.println(searcher.getStatistics());
+    System.out.println(scapSyncHandle.getStatistics());
 
 //    String[] targetArray = { "openssl", "http", "nginx", "outlook",
 //                             "windows", "android", "iphone", "explorer",
@@ -38,7 +46,7 @@ public class JsonPlayGround {
 
     for (String target : targetArray) {
       
-      ScapSyncSearch search = searcher.search(target, null, IScapSyncSearchOrderFilter.SORT_RELEVANT);
+      ScapSyncSearch search = scapSyncHandle.search(target, null, IScapSyncSearchOrderFilter.SORT_RELEVANT);
       
       ScapSyncSearchListener searchListener = new ScapSyncSearchListener() {
         @Override
@@ -46,7 +54,19 @@ public class JsonPlayGround {
           for (IScapSyncSearchResult res : results) {
             System.out.println("Id(" + count + "): " + res.getId());
             count++;
-             // System.out.println("Desc: " + res.getTitleText());
+            if (res.getType() == IScapSyncSearchResultType.TYPE_CCE) {
+              IScapSyncCceDetails details = scapSyncHandle.getCceDetails(res.getId());
+              System.out.println("Details:" + details.toString());
+            } else if (res.getType() == IScapSyncSearchResultType.TYPE_CPE) {
+              IScapSyncCpeDetails details = scapSyncHandle.getCpeDetails(res.getId());
+              System.out.println("Details:" + details.toString());
+            } else if (res.getType() == IScapSyncSearchResultType.TYPE_CVE) {
+              IScapSyncCveDetails details = scapSyncHandle.getCveDetails(res.getId());
+              System.out.println("Details:" + details.toString());
+            } else if (res.getType() == IScapSyncSearchResultType.TYPE_CWE) {
+              IScapSyncCweDetails details = scapSyncHandle.getCweDetails(res.getId());
+              System.out.println("Details:" + details.toString());
+            } 
           }
         }
       };
