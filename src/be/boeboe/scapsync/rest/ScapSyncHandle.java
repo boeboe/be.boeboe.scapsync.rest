@@ -1,7 +1,6 @@
 package be.boeboe.scapsync.rest;
 
 import java.net.URI;
-import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,9 +125,9 @@ public class ScapSyncHandle implements IScapSyncHandle {
    * @see be.boeboe.scapsync.rest.interfaces.IScapSyncHandle#getStatistics()
    */
   @Override
-  public Map<String, Integer> getStatistics() {
+  public IScapSyncStats getStatistics() {
     IScapSyncStats stats = new ScapSyncStatsRest(ScapSyncUtils.execRestGet(fStatsUri));
-    return stats.getStatistics();
+    return stats;
   }
 
   /**

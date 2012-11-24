@@ -8,17 +8,12 @@ import be.boeboe.scapsync.rest.interfaces.IScapSyncFeed;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchOrderFilter;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResult;
 import be.boeboe.scapsync.rest.interfaces.IScapSyncSearchResultType;
+import be.boeboe.scapsync.rest.interfaces.IScapSyncStats;
 
 public class JsonPlayGround {
   
   private static int count = 0;
 
-  /**
-   * @param args
-   */
-  /**
-   * @param args
-   */
   public static void main(String[] args) {
 
     final ScapSyncHandle scapSyncHandle = new ScapSyncHandle();
@@ -31,7 +26,10 @@ public class JsonPlayGround {
       System.out.println("OLD: " + feed.toString());
     }
     
-    System.out.println(scapSyncHandle.getStatistics());
+    IScapSyncStats stats = scapSyncHandle.getStatistics();
+    System.out.println(stats.getTitle());
+    System.out.println(stats.getStatistics().toString());
+    System.out.println(stats.getLabels().toString());
 
 //    String[] targetArray = { "openssl", "http", "nginx", "outlook",
 //                             "windows", "android", "iphone", "explorer",

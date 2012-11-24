@@ -3,8 +3,6 @@
  */
 package be.boeboe.scapsync.rest.interfaces;
 
-import java.util.Map;
-
 import be.boeboe.scapsync.rest.ScapSyncSearch;
 
 /**
@@ -53,11 +51,10 @@ public interface IScapSyncHandle {
   
   /**
    * Get full statistics of the available SCAP data.
-   * @param searchResult the search result containing generic CWE data
-   * @return IScapSyncCweDetails the full details of this CWE
+   * @return IScapSyncStats the full details of this CWE
    */
   
-  public Map<String, Integer> getStatistics();
+  public IScapSyncStats getStatistics();
 
   /**
    * Get the daily feeds from ScapSync.
