@@ -1,6 +1,8 @@
 package be.boeboe.scapsync.rest;
 
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +33,7 @@ public class ScapSyncHandle implements IScapSyncHandle {
   private static final String SEARCH_URL = "search_url";
   private static final String STATS_URL = "stats_url";
   private static final String DAILY_FEED = "daily_feed_url";
+  private static final String ATOM_FEED_FEED = "atom_feed_url";
   private static final String CCE_URL_PATTERN = "cce_url_pattern";
   private static final String CPE_URL_PATTERN = "cpe_url_pattern";
   private static final String CVE_URL_PATTERN = "cve_url_pattern";
@@ -38,6 +41,7 @@ public class ScapSyncHandle implements IScapSyncHandle {
 
   private URI fSearchUri;
   private URI fDailyFeedUri;
+  private URI fFeedUri;
   private URI fStatsUri;
   private URI fCceUri;
   private URI fCpeUri;
@@ -50,6 +54,7 @@ public class ScapSyncHandle implements IScapSyncHandle {
     try {
       fSearchUri = URI.create(jsonMain.getString(SEARCH_URL));
       fDailyFeedUri = URI.create(jsonMain.getString(DAILY_FEED));
+      fFeedUri = URI.create(jsonMain.getString(ATOM_FEED_FEED));
       fStatsUri = URI.create(jsonMain.getString(STATS_URL));
       
       String cceUrlPattern = jsonMain.getString(CCE_URL_PATTERN);
@@ -137,5 +142,17 @@ public class ScapSyncHandle implements IScapSyncHandle {
   public IScapSyncDailyFeed getDailyFeed() {
     IScapSyncDailyFeed dailyFeeds = new ScapSyncDailyFeedRest(ScapSyncUtils.execRestGet(fDailyFeedUri));
     return dailyFeeds;
+  }
+
+  /**
+   * @see be.boeboe.scapsync.rest.interfaces.IScapSyncHandle#getFeedFeed()
+   */
+  @Override
+  public IScapSyncDailyFeed getFeed(Date date) {
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    String formattedDate = formatter.format(date);
+    URI feedsUri = URI.create(fFeedUri + formattedDate);
+    IScapSyncDailyFeed atomFeeds = new ScapSyncDailyFeedRest(ScapSyncUtils.execRestGet(feedsUri));
+    return atomFeeds;
   }
 }
