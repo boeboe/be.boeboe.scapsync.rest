@@ -26,10 +26,9 @@ public class ScapSyncDailyFeedRest implements IScapSyncDailyFeed {
     super();
     try {
       fCurrentDate = ScapSyncUtils.getDate(scapSyncDailyFeedRest.getString(CURRENT_DATE));
-      fFeedStats = ScapSyncUtils.getObjectArray(scapSyncDailyFeedRest.getJSONArray(COUNTS), ScapSyncFeedCountRest.class);
-      fScapSyncNewFeeds = ScapSyncUtils.getObjectArray(scapSyncDailyFeedRest.getJSONObject(VERSIONS).getJSONArray(NEW_ITEMS), ScapSyncFeedRest.class);
-      fScapSyncChangedFeeds = ScapSyncUtils.getObjectArray(scapSyncDailyFeedRest.getJSONObject(VERSIONS).getJSONArray(CHANGED_ITEMS), ScapSyncFeedRest.class);
-    } catch (JSONException e) {
+      fFeedStats = scapSyncDailyFeedRest.has(COUNTS) ? ScapSyncUtils.getObjectArray(scapSyncDailyFeedRest.getJSONArray(COUNTS), ScapSyncFeedCountRest.class): fFeedStats;
+      fScapSyncNewFeeds = scapSyncDailyFeedRest.has(VERSIONS) ? ScapSyncUtils.getObjectArray(scapSyncDailyFeedRest.getJSONObject(VERSIONS).getJSONArray(NEW_ITEMS), ScapSyncFeedRest.class): fScapSyncNewFeeds;
+      fScapSyncChangedFeeds = scapSyncDailyFeedRest.has(VERSIONS) ? ScapSyncUtils.getObjectArray(scapSyncDailyFeedRest.getJSONObject(VERSIONS).getJSONArray(CHANGED_ITEMS), ScapSyncFeedRest.class): fScapSyncChangedFeeds;    } catch (JSONException e) {
       e.printStackTrace();
     }
   }

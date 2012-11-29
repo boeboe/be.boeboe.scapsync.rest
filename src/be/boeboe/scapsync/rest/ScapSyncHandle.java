@@ -151,7 +151,7 @@ public class ScapSyncHandle implements IScapSyncHandle {
   public IScapSyncDailyFeed getFeed(Date date) {
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     String formattedDate = formatter.format(date);
-    URI feedsUri = URI.create(fFeedUri + formattedDate);
+    URI feedsUri = URI.create(fFeedUri + "/" + formattedDate);
     IScapSyncDailyFeed atomFeeds = new ScapSyncDailyFeedRest(ScapSyncUtils.execRestGet(feedsUri));
     return atomFeeds;
   }
